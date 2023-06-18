@@ -1,0 +1,264 @@
+/* Start Post Table */
+.post {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.post__title__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post__title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.new__post__btn__container {
+    border-radius: 5px;
+    background-color: var(--green-btn);
+    padding: 15px 30px;
+}
+
+.new__post__btn__container:hover {
+    background-color: var(--green-light);
+}
+
+.new__post__btn__container a {
+    color: white;
+    text-decoration: none;
+}
+
+.post__table__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray-border);
+    padding: 10px 0;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: var(--white);
+}
+
+.post__table__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 5px 10px;
+}
+
+.posts__table__container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.posts__table {
+    width: 100%;
+    padding: 10px 0;
+    border-collapse: collapse;
+}
+
+.table__head__row {
+    background-color: var(--gray-bg);
+}
+
+.table__head__row th {
+    color: var(--gray-text);
+    padding: 10px 0;
+    text-align: start;
+    font-weight: normal;
+}
+
+.table__head__row th:first-child {
+    padding: 10px;
+    width: 50px;
+    text-align: center;
+}
+
+.post__checkbox {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background-color: var(--gray-bg);
+    accent-color: green;
+    outline: none;
+    cursor: pointer;
+}
+
+.table__body__row tr td {
+    border-bottom: 1px solid var(--gray-border);
+}
+
+.table__body__row td:first-child {
+    padding: 10px;
+    width: 50px;
+    text-align: center;
+}
+
+.post__table__image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.post__table__content {
+    font-size: 14px;
+    color: var(--gray-text);
+}
+
+.post__table__status__draft {
+    background-color: var(--draft-bg);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 125px;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.post__table__status__publish {
+    background-color: var(--green-light);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 125px;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.post__table__edit__link {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.post__table__edit__link p {
+    font-size: 14px;
+    color: var(--edit);
+    margin: 0 5px;
+    width: fit-content;
+}
+
+.edit__pen__icon {
+    color: var(--edit);
+    margin: 0 5px;
+}
+
+.post__table__edit__link:hover .edit__pen__icon, .post__table__edit__link:hover p {
+    color: var(--edit-hover);
+}
+
+.post__table__delete__link {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.post__table__delete__link p {
+    font-size: 14px;
+    color: var(--delete);
+    margin: 0 5px;
+    width: fit-content;
+}
+
+.delete__trash__icon {
+    color: var(--delete);
+    margin: 0 5px;
+}
+
+.post__table__delete__link:hover .delete__trash__icon, .post__table__delete__link:hover p {
+    color: var(--delete-hover);
+}
+
+/* Start Post Table Search*/
+.search__post__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__post__form {
+    position: relative;
+}
+
+.post__search__input {
+    padding: 10px 30px 10px 10px;
+    border: 1px solid var(--gray-border);
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: 'Noto Sans Georgian', serif;
+}
+
+.post__search__icon__btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    margin-right: 10px;
+}
+
+.post__search__icon__btn svg {
+    color: var(--green-btn);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* End Post Table Search*/
+/* Start Post Table Category Multiple Select */
+.select__category__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post__category__label {
+    margin: 0 !important;
+}
+
+.mbsc-ios.mbsc-textfield-tag-clear {
+    color: var(--white);
+}
+
+.mbsc-ios.mbsc-textfield-tag {
+    background: var(--green-btn);
+    color: var(--white);
+}
+
+.mbsc-ios.mbsc-textfield.mbsc-textfield-tags {
+    min-height: 42px;
+    padding: 3px 40px 3px 15px;
+}
+
+.mbsc-textfield-tags-placeholder {
+    opacity: 1;
+    color: var(--gray-text);
+}
+
+/* End Post Table Category Multiple Select */
+/* Start Date Picker */
+.date__picker__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.date__picker__container input {
+    padding: 10px;
+    border: 1px solid var(--gray-border);
+    color: var(--gray-text);
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: 'Noto Sans Georgian', serif;
+    cursor: pointer;
+}
+
+/* End Date Picker */
+/* End Post Table */
