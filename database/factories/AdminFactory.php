@@ -1,20 +1,15 @@
 <?php
 
-namespace Database\Factories\Admin;
+namespace Database\Factories;
 
-
-use App\Models\Admin\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AppModelsAdminAdmin>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
 class AdminFactory extends Factory
 {
-
-    protected $model = Admin::class;
-
     /**
      * Define the model's default state.
      *
@@ -23,8 +18,8 @@ class AdminFactory extends Factory
     public function definition(): array
     {
         return [
-            'username' => $this->faker->userName,
-            'email' => $this->faker->safeEmail,
+            'username' => 'dato',
+            'email' => 'datokifshidze@gmail.com',
             'password' => bcrypt('admin'),
             'remember_token' => Str::random(10),
         ];

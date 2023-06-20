@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="{{ asset('css/admin/responsive.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/admin/news/category/index.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/news/category/modal.css') }}">
 
 @endsection
 
 @section('script')
     <script src="{{ asset('js/admin/main.js') }}"></script>
     <script src="{{ asset('js/admin/news/category/index.js') }}"></script>
-    <script src="{{ asset('js/admin/news/category/modal.js') }}"></script>
 @endsection
 
 @section('content')
@@ -27,7 +25,9 @@
                 </p>
             </div>
             <div class="new__category">
-                <a href="javascript:void(0)" onclick="openModal('modal','create')">{{ __('admin.new_category') }}</a>
+                <a href="{{ route('create_category') }}">
+                    {{ __('admin.new_category') }}
+                </a>
             </div>
 
         </div>
@@ -74,7 +74,7 @@
                             </td>
                             <td class="tbody__td">{{ $category->updated_at }}</td>
                             <td>
-                                <a href="javascript:void(0)" class="edit__link" onclick="openModal('modal','edit',{{ $category->id }})">
+                                <a href="category/{{$category->id}}/edit" class="edit__link">
                                     <i class="pen__icon fa-solid fa-pen"></i>
                                     <p>{{ __('admin.edit') }}</p>
                                 </a>
@@ -95,6 +95,5 @@
 
     </div>
 
-    @include('admin.news.category.modal')
 
 @endsection

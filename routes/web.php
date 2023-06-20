@@ -39,10 +39,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
             Route::get('news/create', [NewsController::class, 'create'])->name('news_create');
 
             Route::get('/category', [CategoryController::class, 'index'])->name('category_list');
-            Route::post('/category/create', [CategoryController::class, 'store'])->name('create_category');
-            Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('delete_category');
+            Route::get('category/create', [CategoryController::class, 'create'])->name('create_category');
+            Route::post('/category/store', [CategoryController::class, 'store'])->name('store_category');
             Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('edit_category');
             Route::put('/category/{id}', [CategoryController::class, 'update'])->name('update_category');
+            Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('delete_category');
 
             Route::get('/author', [AuthorController::class, 'index'])->name('author_list');
             Route::get('/author1', [AuthorController::class, 'index'])->name('author_list');

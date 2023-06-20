@@ -16,6 +16,29 @@ return [
     'category' => 'კატეგორია',
     'author' => 'ავტორი',
     'setting' => 'პარამეტრები',
+    'name' => 'სახელი',
+    'slug' => 'Slug',
+    'visibility' => 'ხილვადობა',
+    'email' => 'ელ-ფოსტა',
+    'last_update' => 'ბოლო განახლება',
+    'description' => 'აღწერა',
+    'facebook' => 'ფეისბუქი',
+    'select_category' => 'აირჩიე კატეგორია',
+    'image' => 'სურათი',
+    'title' => 'სახელწოდება',
+    'status' => 'სტატუსი',
+    'publish_date' => 'გამოქვეყნების თარიღი',
+    'publish' => 'გამოქვეყნებული',
+    'pending' => 'მომლოდინე',
+    'select_author' => 'აირჩიე ავტორი',
+    'tag' => 'თაგი',
+    'write_tag' => 'დაწერეთ თაგი',
+    'save' => 'შენახვა',
+    'cancel' => 'გაუქმება',
+    'chose_image' => 'აირჩიე სურათი',
+    'chose_file' => 'აირჩიე ფაილი',
+    'edit' => 'რედაქტირება',
+
 
     // Login
     'welcome' => 'გამარჯობა!!!',
@@ -24,44 +47,20 @@ return [
     'success_login' => 'მოგესალმებით კიდევ ერთხელ!',
     'success_logout' => 'თქვენ წარმატებით დატოვეთ სისტემა!',
 
-
-    // Author & Category
+    // Author
     'new_author' => 'ახალი ავტორი',
-    'name' => 'სახელი',
-    'slug' => 'ლინკი',
-    'visibility' => 'ხილვადობა',
-    'email' => 'ელ-ფოსტა',
-    'last_update' => 'ბოლო განახლება',
     'edit_author' => 'ავტორის რედაქტირება',
-    'description' => 'აღწერა',
-    'facebook' => 'ფეისბუქი',
     'publish_author' => 'ავტორის ხილვადობა',
     'create_author' => 'ავოტორის შექმნა',
 
+    // Category
     'new_category' => 'ახალი კატეგორია',
     'create_category' => 'კატეგორიის შექმნა',
     'publish_category' => 'კატეგორიის ხილვადობა',
     'edit_category' => 'კატეგორიის რედაქტირება',
 
-
     // News
     'new_news' => 'ახალი სიახლე',
-    'select_category' => 'აირჩიე კატეგორია',
-    'image' => 'სურათი',
-    'title' => 'სახელწოდება',
-    'status' => 'სტატუსი',
-    'publish_date' => 'გამოქვეყნების თარიღი',
-    'publish' => 'გამოქვეყნებული',
-    'pending' => 'მომლოდინე',
     'create_news' => 'სიახლის შექმნა',
-    'select_author' => 'აირჩიე ავტორი',
-    'tag' => 'თაგი',
-    'write_tag' => 'დაწერეთ თაგი',
-    'save' => 'შენახვა',
-    'cancel' => 'გაუქმება',
-    'chose_image' => 'აირჩიე სურათი',
-    'chose_file' => 'აირჩიე ფაილი',
-
-
 
 ];

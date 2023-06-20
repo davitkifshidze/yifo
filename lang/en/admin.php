@@ -16,6 +16,27 @@ return [
     'visitor' => 'visitor',
     'product' => 'Product',
     'order' => 'Order',
+    'name' => 'Name',
+    'slug' => 'Slug',
+    'visibility' => 'Visibility',
+    'email' => 'E-mail',
+    'last_update' => 'Last Update',
+    'description' => 'Description',
+    'facebook' => 'Facebook',
+    'select_category' => 'Select Category',
+    'image' => 'Image',
+    'title' => 'Title',
+    'status' => 'Status',
+    'publish_date' => 'Publish Date',
+    'publish' => 'Publish',
+    'pending' => 'Pending',
+    'select_author' => 'Select Author',
+    'tag' => 'Tag',
+    'write_tag' => 'Write Tag',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+    'chose_image' => 'Chose Image',
+    'chose_file' => 'Chose File',
 
     // Login
     'welcome' => 'Hello Again!!!',
@@ -26,14 +47,7 @@ return [
 
     // Author
     'new_author' => 'New Author',
-    'name' => 'Name',
-    'slug' => 'Slug',
-    'visibility' => 'Visibility',
-    'email' => 'E-mail',
-    'last_update' => 'Last Update',
     'edit_author' => 'Edit Author',
-    'description' => 'Description',
-    'facebook' => 'Facebook',
     'publish_author' => 'Publish Author',
     'create_author' => 'Create Author',
 
@@ -44,22 +58,6 @@ return [
 
     // News
     'new_news' => 'New News',
-    'select_category' => 'Select Category',
-    'image' => 'Image',
-    'title' => 'Title',
-    'status' => 'Status',
-    'publish_date' => 'Publish Date',
-    'publish' => 'Publish',
-    'pending' => 'Pending',
     'create_news' => 'Create News',
-    'select_author' => 'Select Author',
-    'tag' => 'Tag',
-    'write_tag' => 'Write Tag',
-    'save' => 'Save',
-    'cancel' => 'Cancel',
-    'chose_image' => 'Chose Image',
-    'chose_file' => 'Chose File',
-
-
 
 ];

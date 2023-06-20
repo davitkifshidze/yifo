@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('author_translations', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('author_id')->unsigned();
+            $table->unsignedBigInteger('author_id')->unsigned();
             $table->string('locale')->index();
 
             $table->string('name')->nullable()->default(NULL);

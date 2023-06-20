@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('authors', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->string('slug');
             $table->string('email');
             $table->string('facebook');
             $table->boolean('publish')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -23,9 +23,30 @@ class NewsCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-//            'name.ka' => 'required_without_all:name.en,description.ka,description.en',
-//            'name.en' => 'required_without_all:name.ka,description.en,description.ka',
-        ];
+
+        $id = $this->route('id');
+
+        if ($this->isMethod('post')) {
+
+            return [
+                'name' => 'required|string|min:3|max:64',
+                'description' => 'max:1024',
+                'slug' => 'required|unique:categories,slug',
+            ];
+        } else {
+
+            return [
+                'name' => 'required|string|min:3|max:64',
+                'description' => 'max:1024',
+                'slug' => [
+                    'required',
+                    'string',
+                    Rule::unique('categories', 'slug')->ignore($id)
+                ],
+
+            ];
+        }
+
+
     }
 }

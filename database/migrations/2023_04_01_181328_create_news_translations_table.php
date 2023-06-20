@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('news_translations', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('news_id')->unsigned();
+            $table->unsignedBigInteger('news_id')->unsigned();
             $table->string('locale')->index();
 
-            $table->string('title');
-            $table->text('text');
-            $table->string('tag');
+            $table->string('title')->nullable()->default(NULL);
+            $table->text('text')->nullable()->default(NULL);
+            $table->string('tag')->nullable()->default(NULL);
 
             $table->unique(['news_id','locale']);
             $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
