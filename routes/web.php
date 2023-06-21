@@ -47,7 +47,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
             Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('delete_category');
 
             Route::get('/author', [AuthorController::class, 'index'])->name('author_list');
-            Route::get('/author1', [AuthorController::class, 'index'])->name('author_list');
+            Route::get('author/create', [AuthorController::class, 'create'])->name('create_author');
+            Route::post('/author/store', [AuthorController::class, 'store'])->name('store_author');
+            Route::get('/author/{id}/edit', [AuthorController::class, 'edit'])->name('edit_author');
+            Route::put('/author/{id}', [AuthorController::class, 'update'])->name('update_author');
+            Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->name('delete_author');
+
 
         });
 

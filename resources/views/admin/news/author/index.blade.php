@@ -12,7 +12,7 @@
 
 @section('script')
     <script src="{{ asset('js/admin/main.js') }}"></script>
-    <script src="{{ asset('js/admin/news/author/modal.js') }}"></script>
+    <script src="{{ asset('js/admin/news/author/index.js') }}"></script>
 @endsection
 
 @section('content')
@@ -26,6 +26,9 @@
                 </p>
             </div>
             <div class="new__author">
+                <a href="{{ route('create_author') }}">
+                    {{ __('admin.new_author') }}
+                </a>
                 <a href="javascript:void(0)" onclick="openModal('create__author')">{{ __('admin.new_author') }}</a>
             </div>
         </div>
@@ -64,32 +67,6 @@
                         <td>
                             <input class="author__checkbox" type="checkbox" name="select__author" value="author">
                         </td>
-                        <td class="tbody__td">dato Kifshidze</td>
-                        <td class="tbody__td">dato-kifshidze</td>
-                        <td>
-                            <p class="author__status">
-                                <i class="fa-regular fa-circle-xmark dismiss"></i>
-                            </p>
-                        </td>
-                        <td class="tbody__td">datokifshidze@gmail.com</td>
-                        <td class="tbody__td">Sep 19, 2024</td>
-                        <td>
-                            <a href="javascript:void(0)" class="edit__link"  onclick="openModal('edit__author')">
-                                <i class="pen__icon fa-solid fa-pen"></i>
-                                <p>{{ __('admin.edit') }}</p>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="" class="delete__link">
-                                <i class="delete__icon fa-solid fa-trash-can"></i>
-                                <p>{{ __('admin.delete') }}</p>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input class="author__checkbox" type="checkbox" name="select__author" value="author">
-                        </td>
                         <td class="tbody__td">Davit Kifshidze</td>
                         <td class="tbody__td">davit-kifshidze</td>
                         <td>
@@ -100,7 +77,7 @@
                         <td class="tbody__td">davitkifshidze@gmail.com</td>
                         <td class="tbody__td">Sep 19, 2024</td>
                         <td>
-                            <a href="javascript:void(0)" class="edit__link" onclick="openModal('edit__author')">
+                            <a href="author/#/edit" class="edit__link">
                                 <i class="pen__icon fa-solid fa-pen"></i>
                                 <p>{{ __('admin.edit') }}</p>
                             </a>
@@ -118,10 +95,6 @@
         </div>
 
     </div>
-
-    @include('admin.news.author.create')
-    @include('admin.news.author.edit')
-
 @endsection
 
 

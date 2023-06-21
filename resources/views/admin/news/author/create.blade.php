@@ -1,56 +1,74 @@
-<div id="create__author" class="author__modal">
+@extends('admin.layouts.main_template')
 
-    <div class="modal__content">
-        <div class="modal__header">
-            <p class="modal__title">{{ __('admin.create_author') }}</p>
-            <span class="create__close" onclick="closeModal('create__author')">&times;</span>
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/admin/fonts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/responsive.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/admin/news/author/create.css') }}">
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/admin/main.js') }}"></script>
+    <script src="{{ asset('js/admin/news/author/create.js') }}"></script>
+
+@endsection
+
+@section('content')
+
+    <div class="author__create">
+        <div class="title__container">
+            <p class="create__title">
+                {{ __('admin.create_author') }}
+            </p>
         </div>
-        <div class="modal__body">
 
-            <form action="" method="post">
+        <div class="create__author__container">
+            <form action="{{ route('store_author') }}" method="POST" class="create__form">
 
+                @csrf
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <!-- Title & Slug -->
                 <div class="form__group">
                     <div class="input__group">
-                        <label for="name" class="label">
-                            <p>{{ __('admin.name') }}</p>
+                        <label for="title" class="label">
+                            <p>{{ __('admin.title') }}</p>
                             <span><i class="fa-solid fa-snowflake"></i></span>
                         </label>
-                        <input type="text" id="name" name="name">
+                        <input type="text" name="name" id="name"  value="{{ old('name') }}">
                     </div>
+
                     <div class="input__group">
                         <label for="slug" class="label">
                             <p>{{ __('admin.slug') }}</p>
                             <span><i class="fa-solid fa-snowflake"></i></span>
                         </label>
-                        <input type="text" id="slug" name="slug">
+                        <input readonly class="tag__input readonly__input" type="text" name="slug" id="slug"  value="{{ old('slug') }}">
+
                     </div>
                 </div>
 
                 <div class="form__group">
-                    <div class="input__group__full">
+                    <div class="input__group full__width">
                         <label for="description" class="label">
                             <p>{{ __('admin.description') }}</p>
-                            <span><i class="fa-solid fa-snowflake"></i></span>
                         </label>
-                        <textarea name="description" id="description" cols="20" rows="5"></textarea>
+                        <textarea name="description" id="description" cols="20" rows="5">{{ old('description') }}</textarea>
                     </div>
                 </div>
 
-                <div class="form__group">
-                    <div class="input__group">
-                        <label for="email" class="label">
-                            <p>{{ __('admin.email') }}</p>
-                        </label>
-                        <input type="text" id="email" name="email">
-                    </div>
-                    <div class="input__group">
-                        <label for="facebook" class="label">
-                            <p>{{ __('admin.facebook') }}</p>
-                        </label>
-                        <input type="text" id="facebook" name="facebook">
-                    </div>
-                </div>
-
+                <!-- Status -->
                 <div class="form__group">
                     <div class="switch__container">
                         <label class="switch">
@@ -61,16 +79,18 @@
                     </div>
                 </div>
 
-
-                <div class="form__buttons">
-                    <input class="modal__btn" type="submit" name="create" value="{{ __('admin.create') }}">
-                    <p></p>
+                <div class="create__submit__container">
+                    <input type="submit" value="{{ __('admin.save') }}" class="create__author__btn">
                 </div>
 
-
             </form>
-
         </div>
+
     </div>
 
-</div>
+@endsection
+
+
+
+
+
