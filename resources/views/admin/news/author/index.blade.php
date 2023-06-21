@@ -29,7 +29,6 @@
                 <a href="{{ route('create_author') }}">
                     {{ __('admin.new_author') }}
                 </a>
-                <a href="javascript:void(0)" onclick="openModal('create__author')">{{ __('admin.new_author') }}</a>
             </div>
         </div>
 
@@ -57,38 +56,46 @@
                         <th>{{ __('admin.slug') }}</th>
                         <th>{{ __('admin.visibility') }}</th>
                         <th>{{ __('admin.email') }}</th>
+                        <th>{{ __('admin.description') }}</th>
                         <th>{{ __('admin.last_update') }}</th>
                         <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody class="table__body">
+
+                    @foreach($authors as $key => $author)
+
                     <tr>
                         <td>
                             <input class="author__checkbox" type="checkbox" name="select__author" value="author">
                         </td>
-                        <td class="tbody__td">Davit Kifshidze</td>
-                        <td class="tbody__td">davit-kifshidze</td>
+                        <td class="tbody__td">{{ $author->name }}</td>
+                        <td class="tbody__td">{{ $author->slug }}</td>
                         <td>
                             <p class="author__status">
-                                <i class="fa-regular fa-circle-check approve"></i>
+                                <i class="fa-regular {{ $author->publish == 1 ? 'fa-circle-check approve' : 'fa-circle-xmark dismiss' }}"></i>
                             </p>
                         </td>
-                        <td class="tbody__td">davitkifshidze@gmail.com</td>
-                        <td class="tbody__td">Sep 19, 2024</td>
+                        <td class="tbody__td">{{ $author->email }}</td>
+                        <td class="tbody__td">{{ $author->description }}</td>
+                        <td class="tbody__td">{{ $author->updated_at }}</td>
                         <td>
-                            <a href="author/#/edit" class="edit__link">
+                            <a href="author/{{ $author->id }}/edit" class="edit__link">
                                 <i class="pen__icon fa-solid fa-pen"></i>
                                 <p>{{ __('admin.edit') }}</p>
                             </a>
                         </td>
                         <td>
-                            <a href="" class="delete__link">
+                            <a href="javascript:void(0)" class="delete__link" data-id="{{ $author->id }}">
                                 <i class="delete__icon fa-solid fa-trash-can"></i>
                                 <p>{{ __('admin.delete') }}</p>
                             </a>
                         </td>
                     </tr>
+
+                    @endforeach
+
                     </tbody>
                 </table>
             </div>

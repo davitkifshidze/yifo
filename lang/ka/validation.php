@@ -36,6 +36,7 @@ return [
     'attributes' => [
         'name' => 'სახელწოდება',
         'slug' => 'ლინკი',
+        'email' => 'ელ-ფოსტა',
         'description' => 'აღწერა',
         'password' => 'პაროლი',
         'start_date' => 'დაწყების თარიღი',
