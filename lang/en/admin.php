@@ -59,5 +59,6 @@ return [
     // News
     'new_news' => 'New News',
     'create_news' => 'Create News',
+    'publish_news' => 'Publish News',
 
 ];

@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->string('title')->nullable()->default(NULL);
             $table->text('text')->nullable()->default(NULL);
+            $table->string('image')->nullable();
             $table->string('tag')->nullable()->default(NULL);
 
             $table->unique(['news_id','locale']);

@@ -7,40 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Font Awesome 6.3.0 -->
+    {{-- Font Awesome 6.3.0 --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
 
-    <!-- Jquery CDN -->
+    {{-- Jquery CDN --}}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <!-- Bootstrap CDN -->
+    {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- TinyMce CDN & Local -->
+    {{-- TinyMce --}}
     <script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
 
-    <!-- Date Range Picker -->
+    {{-- Date Range Picker --}}
     <script type="text/javascript" src="{{ asset('assets/plugins/date-range-picker/moment.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/date-range-picker/daterangepicker.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/date-range-picker/daterangepicker.css') }}"/>
 
-    <!-- Tag Picker -->
+    {{-- Tag Picker --}}
     <link rel="stylesheet" href="{{ asset('assets/plugins/tag-picker/tagify.css') }}">
     <script src="{{ asset('assets/plugins/tag-picker/tagify.js') }}"></script>
     <script src="{{ asset('assets/plugins/tag-picker/jQuery.tagify.min.js') }}"></script>
 
-    <!-- Multiple Selector -->
+    {{-- Multiple Selector --}}
     <link rel="stylesheet" href="{{ asset('assets/plugins/multiple-select/css/mobiscroll.javascript.min.css') }}">
     <script src="{{ asset('assets/plugins/multiple-select/js/mobiscroll.javascript.min.js') }}"></script>
 
-    <!-- Date Time Picker -->
+    {{-- Date Time Picker --}}
     <link rel="stylesheet" href="{{ asset('assets/plugins/date-time-picker/flatpickr.min.css') }}">
     <script src="{{ asset('assets/plugins/date-time-picker/flatpickr.js') }}"></script>
 
-    {{--    Sweet Alert    --}}
+    {{-- Sweet Alert --}}
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+    {{-- Select2 --}}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <script src="{{ asset('assets/plugins/select2/js/select2.js') }}"></script>
 
     <!-- Custom Style -->
     @yield('style')

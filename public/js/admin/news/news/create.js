@@ -1,23 +1,44 @@
 // Select Multiple Create Author
-// More info https://demo.mobiscroll.com/select/multiple-select
-mobiscroll.setOptions({
-    locale: mobiscroll.localeEn,
-    theme: 'ios',
-    themeVariant: 'light'
-});
-mobiscroll.select('#create__author__select', {
-    inputElement: document.getElementById('create__author__input')
+
+//Set Dropdown with SearchBox via dropdownAdapter option
+var Utils = $.fn.select2.amd.require('select2/utils');
+var Dropdown = $.fn.select2.amd.require('select2/dropdown');
+var DropdownSearch = $.fn.select2.amd.require('select2/dropdown/search');
+var CloseOnSelect = $.fn.select2.amd.require('select2/dropdown/closeOnSelect');
+var AttachBody = $.fn.select2.amd.require('select2/dropdown/attachBody');
+
+var dropdownAdapter = Utils.Decorate(Utils.Decorate(Utils.Decorate(Dropdown, DropdownSearch), CloseOnSelect), AttachBody);
+
+$("#create__author__select").select2({
+    dropdownAdapter: dropdownAdapter,
+    minimumResultsForSearch: 0,
+    placeholder: "აირჩიეთ ავტორი",
+    allowClear: true,
+    "language": {
+        "noResults": function(){
+            return "მსგავსი ავტორი არ მოიძებნა";
+        }
+    },
+}).on('select2:opening select2:closing', function (event) {
+    const searchfield = $(this).parent().find('.select2-search__field');
+    searchfield.prop('disabled', true);
 });
 
 // Select Multiple Create Category
-// More info https://demo.mobiscroll.com/select/multiple-select
-mobiscroll.setOptions({
-    locale: mobiscroll.localeEn,
-    theme: 'ios',
-    themeVariant: 'light'
-});
-mobiscroll.select('#create__category__select', {
-    inputElement: document.getElementById('create__category__input')
+
+$("#create__category__select").select2({
+    dropdownAdapter: dropdownAdapter,
+    minimumResultsForSearch: 0,
+    placeholder: "აირჩიეთ ავტორი",
+    allowClear: true,
+    "language": {
+        "noResults": function(){
+            return "მსგავსი კატეგორია არ მოიძებნა";
+        }
+    },
+}).on('select2:opening select2:closing', function (event) {
+    const searchfield = $(this).parent().find('.select2-search__field');
+    searchfield.prop('disabled', true);
 });
 
 

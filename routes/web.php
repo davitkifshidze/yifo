@@ -37,6 +37,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
             Route::get('/news', [NewsController::class, 'index'])->name('news_list');
             Route::get('news/create', [NewsController::class, 'create'])->name('news_create');
+            Route::post('news/store', [NewsController::class, 'store'])->name('news_store');
 
             Route::get('/category', [CategoryController::class, 'index'])->name('category_list');
             Route::get('category/create', [CategoryController::class, 'create'])->name('create_category');

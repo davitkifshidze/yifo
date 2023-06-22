@@ -62,5 +62,6 @@ return [
     // News
     'new_news' => 'ახალი სიახლე',
     'create_news' => 'სიახლის შექმნა',
+    'publish_news' => 'სიახლის ხილვადობა',
 
 ];

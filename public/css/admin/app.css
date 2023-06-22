@@ -76,3 +76,7 @@ ul {
 .none {
     display: none;
 }
+
+textarea:focus, input:focus{
+    outline: none;
+}
