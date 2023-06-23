@@ -15,7 +15,7 @@ class News extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'categories';
+    protected $table = 'news';
 
     protected $fillable = [
         'slug',

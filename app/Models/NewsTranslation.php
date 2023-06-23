@@ -10,6 +10,8 @@ class NewsTranslation extends Model
 {
     use HasFactory;
 
+    protected $table = 'news_translations';
+
     protected $fillable = [
         'locale',
         'title',

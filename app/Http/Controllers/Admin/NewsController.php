@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\NewsTranslation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class NewsController extends Controller
@@ -18,6 +19,14 @@ class NewsController extends Controller
     public function index()
     {
         //
+
+//        $values = array_map(function($item) {
+//            return $item->value;
+//        }, json_decode($request->tags));
+//        $tag_data = collect(json_decode($request->tags, true));
+//        $tags = json_encode($tag_data->pluck('value')->toArray());
+
+        
         return view('admin.news.news.index');
     }
 
@@ -27,16 +36,15 @@ class NewsController extends Controller
     public function create()
     {
 
-        $authors = Author::select('authors.*', 'author_translations.*')
+        $authors = Author::select('authors.id', 'authors.slug', 'author_translations.locale', 'author_translations.name')
             ->join('author_translations', 'author_translations.author_id', '=', 'authors.id')
             ->where('author_translations.locale', '=', LaravelLocalization::getCurrentLocale())
             ->get();
 
-        $categories = Category::select('categories.*', 'category_translations.*')
+        $categories = Category::select('categories.id', 'categories.slug', 'category_translations.locale', 'category_translations.name')
             ->join('category_translations', 'category_translations.category_id', '=', 'categories.id')
             ->where('category_translations.locale', '=', LaravelLocalization::getCurrentLocale())
             ->get();
-
 
         return view('admin.news.news.create', compact('authors','categories'));
     }
@@ -53,28 +61,34 @@ class NewsController extends Controller
         $news->slug = $request->slug;
         $news->publish = ($request->publish == 'on') ? 1 : 0;
         $news->publish_date = $request->publish_date;
-//        $news->save();
+        $news->save();
 
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $locale):
+        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $local) {
 
             $translation = new NewsTranslation([
                 'locale' => $localeCode,
                 'title' => ($localeCode == $locale) ? $request->title : null,
                 'text' => ($localeCode == $locale) ? $request->text : null,
                 'image' => ($localeCode == $locale) ? $request->image : null,
-                'tag' => ($localeCode == $locale) ? $request->tag : null,
-
+                'tag' => ($localeCode == $locale) ? $request->tags : null,
             ]);
 
-            dd($translation);
-        
             $news->translations()->save($translation);
 
-        endforeach;
+        }
+
+        $authors_data = array_values($request->author);
+        if(!empty($authors_data)):
+            $news->authors()->sync($authors_data);
+        endif;
+
+        $category_data = array_values($request->category);
+        if(!empty($category_data)):
+            $news->categories()->sync($category_data);
+        endif;
+
 
         return redirect(route('news_list'));
-
-
     }
 
     /**
@@ -91,6 +105,14 @@ class NewsController extends Controller
     public function edit(string $id)
     {
         //
+
+
+//        $values = array_map(function($item) {
+//            return $item->value;
+//        }, json_decode($request->tags));
+//        $tag_data = collect(json_decode($request->tags, true));
+//        $tags = json_encode($tag_data->pluck('value')->toArray());
+
     }
 
     /**

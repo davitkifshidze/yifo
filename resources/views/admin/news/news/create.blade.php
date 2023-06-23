@@ -61,7 +61,7 @@
 
                 <!-- Content -->
                 <div class="create__content">
-                    <textarea id="content" name="content">{{ old('content') }}</textarea>
+                    <textarea id="text" name="text">{{ old('content') }}</textarea>
                 </div>
 
                 <!-- Author & Category -->

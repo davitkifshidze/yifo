@@ -88,7 +88,7 @@
                             <input class="post__checkbox" type="checkbox" name="select__post" value="post">
                         </td>
                         <td>
-                            <img class="post__table__image" src="assets/images/logo/y_logo_purple.png" alt="">
+                            <img class="post__table__image" src="assets/images/logo/y_logo_green.png" alt="">
                         </td>
                         <td class="post__table__content">The Power of Positive Thinking</td>
                         <td class="post__table__content">Arminda Pnel</td>
@@ -144,7 +144,7 @@
                             <input class="post__checkbox" type="checkbox" name="select__post" value="post">
                         </td>
                         <td>
-                            <img class="post__table__image" src="assets/images/logo/y_logo_purple.png" alt="">
+                            <img class="post__table__image" src="assets/images/logo/y_logo_green.png" alt="">
                         </td>
                         <td class="post__table__content">The Power of Positive Thinking</td>
                         <td class="post__table__content">Arminda Pnel</td>
@@ -172,7 +172,7 @@
                             <input class="post__checkbox" type="checkbox" name="select__post" value="post">
                         </td>
                         <td>
-                            <img class="post__table__image" src="assets/images/logo/y_logo_gray.png" alt="">
+                            <img class="post__table__image" src="assets/images/logo/y_logo_green.png" alt="">
                         </td>
                         <td class="post__table__content">10 Tips for Productive Remote Work</td>
                         <td class="post__table__content">Arminda Pnel</td>
@@ -200,7 +200,7 @@
                             <input class="post__checkbox" type="checkbox" name="select__post" value="post">
                         </td>
                         <td>
-                            <img class="post__table__image" src="assets/images/logo/y_logo_purple.png" alt="">
+                            <img class="post__table__image" src="assets/images/logo/y_logo_green.png" alt="">
                         </td>
                         <td class="post__table__content">The Benefits of Mindfulness Meditation</td>
                         <td class="post__table__content">Pemon Clark</td>
