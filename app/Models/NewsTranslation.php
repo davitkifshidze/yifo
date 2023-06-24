@@ -10,6 +10,8 @@ class NewsTranslation extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     protected $table = 'news_translations';
 
     protected $fillable = [
@@ -17,6 +19,7 @@ class NewsTranslation extends Model
         'title',
         'text',
         'image',
+        'thumb_image',
         'tag',
     ];
 

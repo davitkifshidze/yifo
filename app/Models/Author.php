@@ -12,6 +12,8 @@ class Author extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public $timestamps = true;
+
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
@@ -20,10 +22,6 @@ class Author extends Model
         'email',
         'publish',
         'facebook',
-        'linkedin',
-        'github',
-        'youtube',
-        'twitter',
     ];
 
     public function news(): BelongsToMany

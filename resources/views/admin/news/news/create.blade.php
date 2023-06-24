@@ -26,7 +26,7 @@
         </div>
 
         <div class="create__post__container">
-            <form action="{{ route('news_store') }}" method="POST" class="create__form">
+            <form action="{{ route('news_store') }}" method="POST" class="create__form" enctype="multipart/form-data">
 
                 @csrf
 

@@ -13,6 +13,8 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public $timestamps = true;
+
     protected $dates = ['deleted_at'];
 
     protected $table = 'categories';

@@ -10,6 +10,8 @@ class CategoryTranslation extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     protected $fillable = [
         'locale',
         'name',

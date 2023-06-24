@@ -56,6 +56,9 @@
 ```bash
   php artisan config:cache
 ```
+```bash
+  php artisan storage:link
+```
 
 #### ადმინპანელის საბაზისო როუტები
 ```http

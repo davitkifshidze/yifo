@@ -17,10 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('news_id')->unsigned();
             $table->string('locale')->index();
 
-            $table->string('title')->nullable()->default(NULL);
+            $table->string('title',254)->nullable()->default(NULL);
+            $table->text('intro')->nullable()->default(NULL);
             $table->text('text')->nullable()->default(NULL);
-            $table->string('image')->nullable();
-            $table->string('tag')->nullable()->default(NULL);
+            $table->string('image',254)->nullable()->default(NULL);
+            $table->text('thumb_image')->nullable()->default(NULL);
+            $table->text('tag')->nullable()->default(NULL);
 
             $table->unique(['news_id','locale']);
             $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
