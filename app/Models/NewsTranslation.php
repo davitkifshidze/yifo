@@ -17,6 +17,7 @@ class NewsTranslation extends Model
     protected $fillable = [
         'locale',
         'title',
+        'intro',
         'text',
         'image',
         'thumb_image',

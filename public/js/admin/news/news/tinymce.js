@@ -1,9 +1,12 @@
 tinymce.init({
-    selector: '#text',
+    selector: '.text_tinymce',
     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-    buttons: "Upload ImgPen", // or insert them into your toolbar config
+    toolbar: 'undo redo | fontsize | bold italic underline | link image table | align | numlist bullist  ',
+    buttons: "Upload ImgPen",
     a11y_advanced_options: true,
+    menubar: false,
+    height : "200",
+    width : "100%",
 
 
     file_picker_types: 'file image media',
@@ -37,4 +40,15 @@ tinymce.init({
 
         input.click();
     },
+});
+
+tinymce.init({
+    selector: '.intro_tinymce',
+    toolbar: 'undo redo | bold italic underline ',
+    buttons: "Upload ImgPen",
+    a11y_advanced_options: true,
+    menubar: false,
+    height : "200",
+    width : "100%",
+
 });

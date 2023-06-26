@@ -109,16 +109,20 @@ function generateSlug(inputValue) {
 let titleField = document.querySelector("#title");
 let slugField = document.querySelector("#slug");
 
-titleField.addEventListener("keyup", function() {
-    let inputValue = titleField.value;
-    let slug = generateSlug(inputValue);
-    slugField.value = slug
-});
+// titleField.addEventListener("keyup", function() {
+//     let inputValue = titleField.value;
+//     let slug = generateSlug(inputValue);
+//     slugField.value = slug
+// });
 
 
 // Tag Input
-const tag__input = document.querySelector('#tag__input');
-tagify = new Tagify(tag__input);
+const tagInputs = document.querySelectorAll('.tag__input');
+tagInputs.forEach(tagInput => {
+    if (window.getComputedStyle(tagInput).display !== 'none') {
+        new Tagify(tagInput);
+    }
+});
 
 // Date Time Picker
 const datetimepicker = document.querySelector("#datetimepicker");
@@ -127,3 +131,64 @@ flatpickr(datetimepicker, {
     dateFormat: "Y-m-d H:i",
     defaultDate: new Date(),
 });
+
+
+// ============================================================================ //
+
+const lang_tabs = document.querySelectorAll('.lang__tab');
+const active_lang_tab = document.querySelector('.lang__tab.active');
+let active_lang = active_lang_tab.getAttribute('data-lang');
+
+
+var inputs = document.querySelectorAll('input[data-lang]');
+var textareas = document.querySelectorAll('textarea[data-lang]');
+
+inputs.forEach(function(input) {
+    if (input.dataset.lang !== active_lang) {
+        input.style.display = 'none';
+    }
+});
+
+textareas.forEach(function(textarea) {
+    if (textarea.dataset.lang !== active_lang) {
+        textarea.style.display = 'none';
+    }
+});
+
+
+lang_tabs.forEach(lang_tab => {
+    lang_tab.addEventListener('click', () => {
+
+        const lang = lang_tab.getAttribute('data-lang');
+
+        lang_tabs.forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        lang_tab.classList.add('active');
+
+        const active_lang = lang_tab.getAttribute('data-lang');
+
+        const active_inputs = document.querySelectorAll(`input[data-lang="${active_lang}"]`);
+        const active_textareas = document.querySelectorAll(`textarea[data-lang="${active_lang}"]`);
+        console.log(active_inputs);
+        console.log(active_textareas);
+
+
+        active_inputs.forEach(function(input) {
+            if (input.dataset.lang !== active_lang) {
+                input.style.display = 'none';
+            }
+        });
+
+        active_textareas.forEach(function(textarea) {
+            if (textarea.dataset.lang !== active_lang) {
+                textarea.style.display = 'none';
+            }
+        });
+
+
+    });
+});
+
+

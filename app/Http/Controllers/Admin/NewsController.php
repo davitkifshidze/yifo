@@ -59,6 +59,9 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        
+        
+        dd($request);
 
         $locale = LaravelLocalization::getCurrentLocale();
 
@@ -66,7 +69,7 @@ class NewsController extends Controller
         $news->slug = $request->slug;
         $news->publish = ($request->publish == 'on') ? 1 : 0;
         $news->publish_date = $request->publish_date;
-//        $news->save();
+        $news->save();
 
 
         /**
@@ -133,6 +136,7 @@ class NewsController extends Controller
             $translation = new NewsTranslation([
                 'locale' => $localeCode,
                 'title' => ($localeCode == $locale) ? $request->title : null,
+                'intro' => ($localeCode == $locale) ? $request->intro : null,
                 'text' => ($localeCode == $locale) ? $request->text : null,
                 'image' => ($localeCode == $locale) ? $image_path : null,
                 'thumb_image' => ($localeCode == $locale) ? $thumbnail_serialize : null,
@@ -143,23 +147,31 @@ class NewsController extends Controller
 
         }
 
-        $authors_data = array_values($request->author);
-        if (!empty($authors_data)):
-            $news->authors()->sync($authors_data);
-            $news->authors()->updateExistingPivot($authors_data, [
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+
+        if (!empty($request->author)):
+            $authors_data = array_values($request->author);
+            if (!empty($authors_data)):
+                $news->authors()->sync($authors_data);
+                $news->authors()->updateExistingPivot($authors_data, [
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            endif;
         endif;
 
-        $category_data = array_values($request->category);
-        if (!empty($category_data)):
-            $news->categories()->sync($category_data);
-            $news->categories()->updateExistingPivot($category_data, [
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        if (!empty($request->category)):
+            $category_data = array_values($request->category);
+            if (!empty($category_data)):
+                $news->categories()->sync($category_data);
+                $news->categories()->updateExistingPivot($category_data, [
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            endif;
         endif;
+
+
+
 
 
         return redirect(route('news_list'));

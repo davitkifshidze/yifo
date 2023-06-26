@@ -26,6 +26,8 @@ return [
     'select_category' => 'Select Category',
     'image' => 'Image',
     'title' => 'Title',
+    'intro' => 'Intro',
+    'text' => 'Text',
     'status' => 'Status',
     'publish_date' => 'Publish Date',
     'publish' => 'Publish',

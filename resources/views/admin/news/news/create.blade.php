@@ -13,7 +13,6 @@
     <script src="{{ asset('js/admin/main.js') }}"></script>
     <script src="{{ asset('js/admin/news/news/create.js') }}"></script>
     <script src="{{ asset('js/admin/news/news/tinymce.js') }}"></script>
-
 @endsection
 
 @section('content')
@@ -23,6 +22,33 @@
             <p class="create__title">
                 {{ __('admin.create_news') }}
             </p>
+
+            <style>
+                .lang__tabs{
+                    display: flex;
+                    flex-direction: row;
+                }
+                .lang__tab{
+                    padding: 5px 10px;
+                    border: 1px solid var(--green-dark);
+                    color: var(--green-dark);
+                    margin-left: 10px;
+                    background-color:white;
+                }
+                .active{
+                    padding: 5px 10px;
+                    background-color: var(--green-dark) !important;
+                    color: white !important;
+                    margin-left: 10px;
+                }
+
+            </style>
+
+            <div class="lang__tabs">
+                <a class="lang__tab active" data-lang="ka" href="javascript:void(0)">Ka</a>
+                <a class="lang__tab" data-lang="en" href="javascript:void(0)">En</a>
+            </div>
+
         </div>
 
         <div class="create__post__container">
@@ -47,7 +73,11 @@
                             <p>{{ __('admin.title') }}</p>
                             <span><i class="fa-solid fa-snowflake"></i></span>
                         </label>
-                        <input type="text" name="title" id="title" value="{{ old('title') }}">
+
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local)
+                            <input type="text" name="name[<?= $localeCode ?>]"  data-lang="<?= $localeCode ?>" value="{{ old('title') }}">
+                        @endforeach
+
                     </div>
 
                     <div class="input__group">
@@ -55,14 +85,41 @@
                             <p>{{ __('admin.slug') }}</p>
                             <span><i class="fa-solid fa-snowflake"></i></span>
                         </label>
-                        <input class="tag__input" type="text" name="slug" id="slug" value="{{ old('slug') }}">
+
+                        <input type="text" name="slug" value="{{ old('slug') }}">
+
                     </div>
                 </div>
 
-                <!-- Content -->
-                <div class="create__content">
-                    <textarea id="text" name="text">{{ old('content') }}</textarea>
+
+                {{-- Intro & Content --}}
+                <div class="form__group">
+                    <div class="input__group">
+                        <label for="intro" class="label">
+                            <p>{{ __('admin.intro') }}</p>
+                            <span><i class="fa-solid fa-snowflake"></i></span>
+                        </label>
+
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local)
+                            <textarea class="intro_tinymce" name="intro[<?= $localeCode ?>]" data-lang="<?= $localeCode ?>">{{ old('intro') }}</textarea>
+                        @endforeach
+
+
+                    </div>
+
+                    <div class="input__group">
+                        <label for="text" class="label">
+                            <p>{{ __('admin.text') }}</p>
+                            <span><i class="fa-solid fa-snowflake"></i></span>
+                        </label>
+
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local)
+                            <textarea class="text_tinymce" name="text[<?= $localeCode ?>]" data-lang="<?= $localeCode ?>">{{ old('text') }}</textarea>
+                        @endforeach
+
+                    </div>
                 </div>
+
 
                 <!-- Author & Category -->
                 <div class="form__group">
@@ -74,7 +131,7 @@
                         <select name="author[]" id="create__author__select" multiple>
 
                             @foreach($authors as $key => $author)
-                                <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                <option value="{{ $author->id }}" >{{ $author->name }}</option>
                             @endforeach
 
                         </select>
@@ -105,7 +162,11 @@
                             <p>{{ __('admin.tag') }}</p>
                             <span><i class="fa-solid fa-snowflake"></i></span>
                         </label>
-                        <input name="tags" id="tag__input" placeholder="{{ __('admin.write_tag') }}" value="{{ old('content') }}">
+
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local)
+                            <input type="text"  class="tag__input" name="tags[<?= $localeCode ?>]"  data-lang="<?= $localeCode ?>" placeholder="{{ __('admin.write_tag') }}" value="{{ old('tags') }}">
+                        @endforeach
+
                     </div>
                     <div class="input__group">
                         <label for="datetimepicker" class="label">
@@ -175,8 +236,3 @@
 
 
 @endsection
-
-
-
-
-
