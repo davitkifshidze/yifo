@@ -5,7 +5,7 @@ tinymce.init({
     buttons: "Upload ImgPen",
     a11y_advanced_options: true,
     menubar: false,
-    height : "200",
+    height : "235",
     width : "100%",
 
 
@@ -48,7 +48,7 @@ tinymce.init({
     buttons: "Upload ImgPen",
     a11y_advanced_options: true,
     menubar: false,
-    height : "200",
+    height : "235",
     width : "100%",
 
 });

@@ -77,6 +77,10 @@ ul {
     display: none;
 }
 
+.relative{
+    position: relative;
+}
+
 textarea:focus, input:focus{
     outline: none;
 }

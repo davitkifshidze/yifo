@@ -1,5 +1,5 @@
 /* Start Create Post */
-.post__create {
+.create__post__container {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -18,26 +18,74 @@
     font-weight: bold;
 }
 
-.create__post__container {
+.form__container {
     width: 100%;
     display: flex;
+}
+
+.create__form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.lang__tabs{
+    display: flex;
+    flex-direction: row;
+}
+.lang__tab{
+    padding: 5px 10px;
+    border: 1px solid var(--green-dark);
+    color: var(--green-dark);
+    margin-left: 10px;
+    background-color:white;
+}
+.active__lang{
+    padding: 5px 10px;
+    background-color: var(--green-dark) !important;
+    color: white !important;
+    margin-left: 10px;
+}
+
+.translatable{
+    display: flex;
     flex-direction: column;
+    width: 70%;
     border: 1px solid var(--gray-border);
-    padding: 10px 0;
-    border-radius: 10px;
-    margin-top: 20px;
+    padding: 20px;
+    margin: 20px 20px 20px 0;
     background-color: var(--white);
 }
 
-.create__form {
-    padding: 20px 30px;
+.non__translatable{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 1px solid var(--gray-border);
+    padding: 20px;
+    margin: 20px 0 20px 20px;
+    background-color: var(--white);
+    height: fit-content;
 }
 
 .form__group {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.row{
+    display: flex;
     flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
 .input__group {
@@ -49,12 +97,12 @@
     padding-right: 25px;
 }
 
-.input__group:last-child{
-    padding-right: 0px;
+.full {
+    width: 100%;
 }
 
-.full__width {
-    width: 100%;
+.input__group:last-child{
+    padding-right: 0;
 }
 
 .label {
@@ -456,6 +504,7 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: 20px;
 }
 
 .create__post__btn{
