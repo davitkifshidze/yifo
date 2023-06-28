@@ -39,6 +39,10 @@ return [
     'cancel' => 'Cancel',
     'chose_image' => 'Chose Image',
     'chose_file' => 'Chose File',
+    'keywords' => 'Keywords',
+    'news_meta' => 'News Meta',
+    'facebook_meta' => 'Facebook Meta',
+    'twitter_meta' => 'Twitter Meta',
 
     // Login
     'welcome' => 'Hello Again!!!',

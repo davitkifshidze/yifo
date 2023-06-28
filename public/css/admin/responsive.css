@@ -105,11 +105,4 @@
     }
     /* End Admin Main content */
 
-
-    /* Start Create News Page  */
-    .create__form{
-        flex-direction: column;
-    }
-    /* End Create News Page  */
-
 }

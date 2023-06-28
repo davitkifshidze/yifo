@@ -388,14 +388,14 @@ input:checked + .slider:before {
     padding: 1rem;
     position: relative;
     margin-top: 10px;
-    height: fit-content;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .image__area::before {
-    content: 'Uploaded image result';
+    content: 'არვირთული სურათის სივრცე';
     color: var(--gray);
     font-weight: bold;
     text-transform: uppercase;
@@ -527,11 +527,122 @@ input:checked + .slider:before {
     font-family: var(--font-Noto-Sans-Georgian);
 }
 
-/* End Create Post */
-
-
-
 /* TinyMce */
 .tox-promotion, .tox-statusbar__branding{
     display: none;
 }
+
+/* Meta Box */
+.meta__container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid var(--gray-border);
+    padding: 10px 20px;
+}
+
+.meta__navigation{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 10px;
+    height: 100%;
+}
+
+.meta__navigation ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.meta__navigation ul li{
+    display: flex;
+    padding: 10px 20px;
+    background-color: var(--white);
+    color: var(--green-dark);
+    border: 1px dashed var(--green-dark);
+    font-family: var(--font-Noto-Sans-Georgian);
+    margin: 10px;
+}
+
+.meta__navigation ul li:hover{
+    background-color: var(--green-dark);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.meta__section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    padding: 10px;
+}
+
+.active__tab{
+    background-color: var(--green-dark) !important;
+    color: var(--white) !important;
+    cursor: pointer !important;
+}
+
+.show__tab {
+    display: flex !important;
+    animation: fade__in 1s;
+}
+
+.hide__tab {
+    display: none !important;
+    animation: fade__out 1s;
+}
+
+@keyframes fade__in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade__out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+/* Meta Box */
+
+@media only screen and (max-width: 776px) {
+
+    .create__form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .translatable{
+        width: 100%;
+    }
+
+    .non__translatable{
+        width: 100%;
+        margin: 0;
+    }
+
+    .row{
+        flex-direction: column;
+    }
+
+    .input__group{
+        width: 100%;
+        padding: 0;
+    }
+
+
+
+
+}
+
+/* End Create Post */
+

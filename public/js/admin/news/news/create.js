@@ -65,8 +65,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imageResult')
-                .attr('src', e.target.result);
+            $('#imageResult').attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -115,13 +114,10 @@ let slugField = document.querySelector("#slug");
 //     slugField.value = slug
 // });
 
-
 // Tag Input
 const tagInputs = document.querySelectorAll('.tag__input');
 tagInputs.forEach(tagInput => {
-    if (window.getComputedStyle(tagInput).display !== 'none') {
-        new Tagify(tagInput);
-    }
+    new Tagify(tagInput);
 });
 
 // Date Time Picker
@@ -132,63 +128,62 @@ flatpickr(datetimepicker, {
     defaultDate: new Date(),
 });
 
+// Show Hide Tabs [ Meta ]
+const tabs = document.querySelectorAll('[data-tab]');
+const tab_contents = document.querySelectorAll('[data-tab-content]');
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const selectedTab = tab.dataset.tab;
 
-// ============================================================================ //
-
-const lang_tabs = document.querySelectorAll('.lang__tab');
-const active_lang_tab = document.querySelector('.lang__tab.active');
-let active_lang = active_lang_tab.getAttribute('data-lang');
-
-
-var inputs = document.querySelectorAll('input[data-lang]');
-var textareas = document.querySelectorAll('textarea[data-lang]');
-
-inputs.forEach(function(input) {
-    if (input.dataset.lang !== active_lang) {
-        input.style.display = 'none';
-    }
-});
-
-textareas.forEach(function(textarea) {
-    if (textarea.dataset.lang !== active_lang) {
-        textarea.style.display = 'none';
-    }
-});
-
-
-lang_tabs.forEach(lang_tab => {
-    lang_tab.addEventListener('click', () => {
-
-        const lang = lang_tab.getAttribute('data-lang');
-
-        lang_tabs.forEach(tab => {
-            tab.classList.remove('active');
-        });
-
-        lang_tab.classList.add('active');
-
-        const active_lang = lang_tab.getAttribute('data-lang');
-
-        const active_inputs = document.querySelectorAll(`input[data-lang="${active_lang}"]`);
-        const active_textareas = document.querySelectorAll(`textarea[data-lang="${active_lang}"]`);
-        console.log(active_inputs);
-        console.log(active_textareas);
-
-
-        active_inputs.forEach(function(input) {
-            if (input.dataset.lang !== active_lang) {
-                input.style.display = 'none';
+        tab_contents.forEach(content => {
+            const contentTab = content.dataset.tabContent;
+            if (contentTab !== selectedTab) {
+                content.classList.remove('show__tab');
+                content.classList.add('hide__tab');
             }
         });
 
-        active_textareas.forEach(function(textarea) {
-            if (textarea.dataset.lang !== active_lang) {
-                textarea.style.display = 'none';
-            }
+        const selectedTabContent = document.querySelector(`[data-tab-content="${selectedTab}"]`);
+        selectedTabContent.classList.remove('hide__tab');
+        selectedTabContent.classList.add('show__tab');
+
+        tabs.forEach(tab => {
+            tab.classList.remove('active__tab');
         });
-
-
+        tab.classList.add('active__tab');
     });
 });
 
+// Show Appropriate Container [ Lang Tab ]
+const lang_tabs = document.querySelectorAll('.lang__tab');
+const lang_containers = document.querySelectorAll('.translatable');
+let activeLang = document.querySelector('.active__lang').getAttribute('data-lang');
 
+// Show the initially active language container and its corresponding tab
+let initial_container = document.querySelector(`[data-lang-container="${activeLang}"]`);
+initial_container.classList.remove('hide');
+
+lang_tabs.forEach(active_tab => {
+    active_tab.addEventListener('click', () => {
+        const selectedLang = active_tab.getAttribute('data-lang');
+
+        lang_containers.forEach(container => {
+            container.classList.remove('show');
+            container.classList.add('hide');
+        });
+
+        const active_container = document.querySelector(`[data-lang-container="${selectedLang}"]`);
+        active_container.classList.remove('hide');
+        active_container.classList.add('show');
+
+        lang_tabs.forEach(tab => {
+            tab.classList.remove('active__lang');
+        });
+        active_tab.classList.add('active__lang');
+
+        activeLang = selectedLang;
+
+        const activeTab = active_container.querySelector('[data-tab]');
+        activeTab.click();
+    });
+});

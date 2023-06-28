@@ -41,14 +41,3 @@ tinymce.init({
         input.click();
     },
 });
-
-tinymce.init({
-    selector: '.intro_tinymce',
-    toolbar: 'undo redo | bold italic underline ',
-    buttons: "Upload ImgPen",
-    a11y_advanced_options: true,
-    menubar: false,
-    height : "235",
-    width : "100%",
-
-});

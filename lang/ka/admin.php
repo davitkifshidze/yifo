@@ -39,7 +39,10 @@ return [
     'cancel' => 'გაუქმება',
     'chose_image' => 'აირჩიე სურათი',
     'chose_file' => 'აირჩიე ფაილი',
-    'edit' => 'რედაქტირება',
+    'keywords' => 'საკვანძო სიტყვები',
+    'news_meta' => 'სიახლის მეტა',
+    'facebook_meta' => 'ფეისბუქის მეტა',
+    'twitter_meta' => 'ტვიტერის მეტა',
 
 
     // Login

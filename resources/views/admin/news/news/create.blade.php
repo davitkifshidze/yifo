@@ -44,81 +44,162 @@
             <form action="{{ route('news_store') }}" method="POST" class="create__form" enctype="multipart/form-data">
                 @csrf
 
-                <div class="translatable">
+                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local)
 
-                    {{-- Title & Tag --}}
-                    <div class="form__group row">
-                        <div class="input__group">
-                            <label for="title" class="label">
-                                <p>{{ __('admin.title') }}</p>
-                                <span><i class="fa-solid fa-snowflake"></i></span>
-                            </label>
+                    <div class="translatable hide" data-lang-container="{{ $localeCode }}">
 
-                            <input type="text" name="name" value="{{ old('title') }}">
+                        {{-- Title & Tag --}}
+                        <div class="form__group row">
+                            <div class="input__group">
+                                <label for="title" class="label">
+                                    <p>{{ __('admin.title') }}</p>
+                                    <span><i class="fa-solid fa-snowflake"></i></span>
+                                </label>
+
+                                <input type="text" name="name" value="{{ old('title') }}">
+                            </div>
+
+                            <div class="input__group">
+                                <label for="tag__input" class="label">
+                                    <p>{{ __('admin.tag') }}</p>
+                                    <span><i class="fa-solid fa-snowflake"></i></span>
+                                </label>
+                                <input type="text" class="tag__input" name="tags[{{ $localeCode }}]" placeholder="{{ __('admin.write_tag') }}" value="{{ old('tags') }}">
+                            </div>
+
                         </div>
 
-                        <div class="input__group">
-                            <label for="tag__input" class="label">
-                                <p>{{ __('admin.tag') }}</p>
-                                <span><i class="fa-solid fa-snowflake"></i></span>
-                            </label>
-                            <input type="text"  class="tag__input" name="tags"  placeholder="{{ __('admin.write_tag') }}" value="{{ old('tags') }}">
+                        {{-- Intro & Content --}}
+                        <div class="form__group row">
+                            <div class="input__group full">
+                                <label for="intro" class="label">
+                                    <p>{{ __('admin.intro') }}</p>
+                                    <span><i class="fa-solid fa-snowflake"></i></span>
+                                </label>
+
+                                <textarea class="intro_tinymce" name="intro[{{ $localeCode }}]">{{ old('intro') }}</textarea>
+                            </div>
                         </div>
 
-                    </div>
+                        {{-- Content --}}
+                        <div class="form__group row">
+                            <div class="input__group full">
+                                <label for="text" class="label">
+                                    <p>{{ __('admin.text') }}</p>
+                                    <span><i class="fa-solid fa-snowflake"></i></span>
+                                </label>
 
-                    {{-- Intro & Content --}}
-                    <div class="form__group row">
-                        <div class="input__group">
-                            <label for="intro" class="label">
-                                <p>{{ __('admin.intro') }}</p>
-                                <span><i class="fa-solid fa-snowflake"></i></span>
-                            </label>
-
-                            <textarea class="intro_tinymce" name="intro">{{ old('intro') }}</textarea>
+                                <textarea class="text_tinymce" name="text[{{ $localeCode }}]">{{ old('text') }}</textarea>
+                            </div>
                         </div>
 
-                        <div class="input__group">
-                            <label for="text" class="label">
-                                <p>{{ __('admin.text') }}</p>
-                                <span><i class="fa-solid fa-snowflake"></i></span>
-                            </label>
+                        <!-- Image -->
+                        <div class="create__image__container full">
+                            <a href="javascript:void(0)" class="create__image">
+                                <span>{{ __('admin.image') }}</span>
+                                <i class="fa fa-angle-down upload__image__arrow"></i>
+                            </a>
 
-                            <textarea class="text_tinymce" name="text">{{ old('text') }}</textarea>
-                        </div>
-                    </div>
-
-
-
-                    <!-- Image -->
-                    <div class="create__image__container full">
-
-                        <a href="javascript:void(0)" class="create__image">
-                            <span>{{ __('admin.image') }}</span>
-                            <i class="fa fa-angle-down upload__image__arrow"></i>
-                        </a>
-
-                        <div class="upload__image__container">
-                            <!-- Upload image input-->
-                            <div class="img__input__container">
-                                <input id="upload" type="file" onchange="readURL(this);" name="image" value="{{ old('image') }}">
-                                <label id="upload__label" for="upload" class="choose__img">{{ __('admin.chose_image') }}</label>
-                                <div class="chose__img__container">
-                                    <label for="upload" >
-                                        <i class="fa fa-cloud-upload upload__arrow"></i>
-                                        <small class="choose__file">{{ __('admin.chose_file') }}</small>
-                                    </label>
+                            <div class="upload__image__container">
+                                <!-- Upload image input-->
+                                <div class="img__input__container">
+                                    <input id="upload" type="file" onchange="readURL(this);" name="image" value="{{ old('image') }}">
+                                    <label id="upload__label" for="upload" class="choose__img">{{ __('admin.chose_image') }}</label>
+                                    <div class="chose__img__container">
+                                        <label for="upload">
+                                            <i class="fa fa-cloud-upload upload__arrow"></i>
+                                            <small class="choose__file">{{ __('admin.chose_file') }}</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Uploaded image area-->
+                                <div class="image__area">
+                                    <img id="imageResult" src="#" alt="">
                                 </div>
                             </div>
-                            <!-- Uploaded image area-->
-                            <div class="image__area">
-                                <img id="imageResult"src="#" alt="">
-                            </div>
                         </div>
+
+                        {{-- Meta --}}
+                        <div class="meta__container">
+
+                            <div class="meta__navigation">
+                                <ul>
+                                    <li data-tab="news_{{$localeCode}}" class="active__tab">{{ __('admin.news_meta') }}</li>
+                                    <li data-tab="facebook_{{$localeCode}}">{{ __('admin.facebook_meta') }}</li>
+                                    <li data-tab="tweeter_{{$localeCode}}">{{ __('admin.twitter_meta') }}</li>
+                                </ul>
+                            </div>
+
+                            <div class="meta__section show" data-tab-content="news_{{$localeCode}}">
+                                <div class="input__group full px-0">
+                                    <label for="news_meta_title" class="label">
+                                        <p>{{ __('admin.title') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="news_meta_title[{{ $localeCode }}]" value="{{ old('news_meta_title') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="news_meta_keywords" class="label">
+                                        <p>{{ __('admin.keywords') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="news_meta_keywords[{{ $localeCode }}]" value="{{ old('news_meta_keywords') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="news_meta_description" class="label">
+                                        <p>{{ __('admin.description') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+
+                                    <textarea name="news_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('news_meta_description') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="meta__section hide" data-tab-content="facebook_{{$localeCode}}">
+                                <div class="input__group full px-0">
+                                    <label for="facebook_meta_title" class="label">
+                                        <p>{{ __('admin.title') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="facebook_meta_title[{{ $localeCode }}]" value="{{ old('facebook_meta_title') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="facebook_meta_description" class="label">
+                                        <p>{{ __('admin.description') }}</p>
+                                        <span><i class="fa-solid fa-snowflake[{{ $localeCode }}]"></i></span>
+                                    </label>
+
+                                    <textarea name="facebook_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('facebook_meta_description') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="meta__section hide" data-tab-content="tweeter_{{$localeCode}}">
+                                <div class="input__group full px-0">
+                                    <label for="twitter_meta_title" class="label">
+                                        <p>{{ __('admin.title') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="twitter_meta_title[{{ $localeCode }}]" value="{{ old('twitter_meta_title') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="twitter_meta_description" class="label">
+                                        <p>{{ __('admin.description') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+
+                                    <textarea name="twitter_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('twitter_meta_description') }}</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
 
-
-                </div>
+                @endforeach
 
 
                 <div class="non__translatable">
@@ -185,17 +266,13 @@
 
                     </div>
 
-
                     <div class="create__submit__container">
                         <input type="submit" value="{{ __('admin.save') }}" class="create__post__btn">
-
 
                         <a href="{{ route('news_list') }}" class="cancel__post__btn">
                             {{ __('admin.cancel') }}
                         </a>
-
                     </div>
-
 
                 </div>
 
