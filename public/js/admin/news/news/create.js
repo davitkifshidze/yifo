@@ -43,51 +43,82 @@ $("#create__category__select").select2({
 
 
 // Create Post image
-const create__image = document.querySelector('.create__image')
-const style = (node, styles) => Object.keys(styles).forEach((key) => (node.style[key] = styles[key]))
 
-create__image.addEventListener('click', () => {
-    const upload__container = document.querySelector('.upload__image__container')
-    upload__container.classList.toggle('upload__container__extend')
-    let upload__image__arrow = document.querySelector('.upload__image__arrow')
-    upload__image__arrow.classList.toggle('upload__image__arrow__rotate')
+// create__image.addEventListener('click', () => {
+//     // const upload__container = document.querySelector('.upload__image__container')
+//     const upload__container = document.querySelectorAll('[data-image-container]');
+//
+//     upload__container.classList.toggle('upload__container__extend')
+//     let upload__image__arrow = document.querySelector('.upload__image__arrow')
+//     upload__image__arrow.classList.toggle('upload__image__arrow__rotate')
+//
+//     style(create__image, {
+//         borderRadius: '15px 15px 0 0 ',
+//     })
+// })
 
-    style(create__image, {
-        borderRadius: '15px 15px 0 0 ',
-    })
+const news_images = document.querySelectorAll('[data-image-tab]');
 
+const style = (node, styles) => {
+    Object.keys(styles).forEach((key) => (node.style[key] = styles[key]));
+};
 
-})
+news_images.forEach((news_image) => {
+    news_image.addEventListener('click', () => {
+        const appropriate_image_tab = news_image.getAttribute('data-image-tab');
+        const appropriate_image_container = document.querySelector(`[data-image-container="${appropriate_image_tab}"]`);
+        const arrow = news_image.querySelector('.upload__image__arrow');
+        appropriate_image_container.classList.toggle('upload__container__extend');
+        arrow.classList.toggle('upload__image__arrow__rotate');
+
+        style(news_image, {
+            borderRadius: '15px 15px 0 0',
+        });
+    });
+});
 
 // Show Uploaded Image
-function readURL(input) {
+function readURL(input, imageResultId) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imageResult').attr('src', e.target.result);
+            var imageResult = document.getElementById(imageResultId);
+            if (imageResult) {
+                imageResult.src = e.target.result;
+            }
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const uploadInput = document.querySelector('#upload');
-    uploadInput.addEventListener('change', function () {
-        readURL(uploadInput);
+    const uploadInputs = document.querySelectorAll('input[type="file"]');
+
+    uploadInputs.forEach(function (uploadInput) {
+        const imageResultId = uploadInput.getAttribute('data-image-result');
+        uploadInput.addEventListener('change', function () {
+            readURL(uploadInput, imageResultId);
+        });
     });
 });
 
 // Show Uploaded Image Name
-const input = document.getElementById('upload');
-const infoArea = document.getElementById('upload__label');
+const inputs = document.querySelectorAll('input[type="file"]');
 
-input.addEventListener( 'change', showFileName );
-function showFileName( event ) {
+inputs.forEach(function (input) {
+    input.addEventListener('change', showFileName);
+});
+
+function showFileName(event) {
     var input = event.srcElement;
     var fileName = input.files[0].name;
+    var infoArea = input.closest('.upload__image__container').querySelector('.choose__img');
     infoArea.textContent = 'File name: ' + fileName;
 }
+
+
+
 
 // Generate Slug Function
 function generateSlug(inputValue) {

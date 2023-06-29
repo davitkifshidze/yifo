@@ -95,18 +95,19 @@
 
                         <!-- Image -->
                         <div class="create__image__container full">
-                            <a href="javascript:void(0)" class="create__image">
+                            <a href="javascript:void(0)" class="create__image" data-image-tab="image_{{ $localeCode }}">
                                 <span>{{ __('admin.image') }}</span>
                                 <i class="fa fa-angle-down upload__image__arrow"></i>
                             </a>
 
-                            <div class="upload__image__container">
+                            <div class="upload__image__container" data-image-container="image_{{ $localeCode }}">
                                 <!-- Upload image input-->
                                 <div class="img__input__container">
-                                    <input id="upload" type="file" onchange="readURL(this);" name="image" value="{{ old('image') }}">
-                                    <label id="upload__label" for="upload" class="choose__img">{{ __('admin.chose_image') }}</label>
+
+                                    <input id="upload_{{ $localeCode }}" class="upload__img" type="file" onchange="readURL(this, 'imageResult_{{ $localeCode }}');" name="image[{{ $localeCode }}]" value="{{ old('image') }}">
+                                    <label id="upload__label_{{ $localeCode }}"  class="choose__img upload__img__label" for="upload_{{ $localeCode }}">{{ __('admin.chose_image') }}</label>
                                     <div class="chose__img__container">
-                                        <label for="upload">
+                                        <label for="upload_{{ $localeCode }}">
                                             <i class="fa fa-cloud-upload upload__arrow"></i>
                                             <small class="choose__file">{{ __('admin.chose_file') }}</small>
                                         </label>
@@ -114,11 +115,10 @@
                                 </div>
                                 <!-- Uploaded image area-->
                                 <div class="image__area">
-                                    <img id="imageResult" src="#" alt="">
+                                    <img id="imageResult_{{ $localeCode }}" src="#" alt="">
                                 </div>
                             </div>
                         </div>
-
                         {{-- Meta --}}
                         <div class="meta__container">
 

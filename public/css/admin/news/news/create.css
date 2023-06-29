@@ -372,11 +372,11 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-#upload {
+.upload__img {
     opacity: 0;
 }
 
-#upload__label {
+.upload__img__label {
     position: absolute;
     top: 50%;
     left: 1rem;
@@ -539,6 +539,7 @@ input:checked + .slider:before {
     align-items: center;
     border: 1px solid var(--gray-border);
     padding: 10px 20px;
+    min-height: 420px;
 }
 
 .meta__navigation{
@@ -573,10 +574,10 @@ input:checked + .slider:before {
 .meta__section{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 70%;
     padding: 10px;
+    height: 100%;
 }
 
 .active__tab{
@@ -639,7 +640,17 @@ input:checked + .slider:before {
         padding: 0;
     }
 
+    .meta__container{
+        flex-direction: column;
+    }
 
+    .meta__navigation{
+        width: 100%;
+    }
+
+    .meta__section{
+        width: 100%;
+    }
 
 
 }
