@@ -55,8 +55,7 @@
                                     <p>{{ __('admin.title') }}</p>
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
-
-                                <input type="text" name="name" value="{{ old('title') }}">
+                                <input type="text" name="title[{{ $localeCode }}]" data-lang="{{ $localeCode }}" value="{{ old('title') }}">
                             </div>
 
                             <div class="input__group">
@@ -93,32 +92,19 @@
                             </div>
                         </div>
 
-                        <!-- Image -->
-                        <div class="create__image__container full">
-                            <a href="javascript:void(0)" class="create__image" data-image-tab="image_{{ $localeCode }}">
-                                <span>{{ __('admin.image') }}</span>
-                                <i class="fa fa-angle-down upload__image__arrow"></i>
-                            </a>
-
+                        {{-- Image --}}
+                        <div class="image__container full">
                             <div class="upload__image__container" data-image-container="image_{{ $localeCode }}">
-                                <!-- Upload image input-->
-                                <div class="img__input__container">
-
-                                    <input id="upload_{{ $localeCode }}" class="upload__img" type="file" onchange="readURL(this, 'imageResult_{{ $localeCode }}');" name="image[{{ $localeCode }}]" value="{{ old('image') }}">
-                                    <label id="upload__label_{{ $localeCode }}"  class="choose__img upload__img__label" for="upload_{{ $localeCode }}">{{ __('admin.chose_image') }}</label>
-                                    <div class="chose__img__container">
-                                        <label for="upload_{{ $localeCode }}">
-                                            <i class="fa fa-cloud-upload upload__arrow"></i>
-                                            <small class="choose__file">{{ __('admin.chose_file') }}</small>
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- Uploaded image area-->
-                                <div class="image__area">
+                                {{-- Upload image input --}}
+                                <input id="upload_{{ $localeCode }}" class="upload__img" type="file"  data-locale="{{ $localeCode }}" data-image-input onchange="readURL(this, 'imageResult_{{ $localeCode }}');" name="image[{{ $localeCode }}]" value="{{ old('image') }}">
+                                {{-- Upload image area --}}
+                                <div class="image__area" onclick="open_input('upload_{{ $localeCode }}')">
+                                    <p class="image__area__info" id="info_{{ $localeCode }}">ატვირთეთ სურათი</p>
                                     <img id="imageResult_{{ $localeCode }}" src="#" alt="">
                                 </div>
                             </div>
                         </div>
+
                         {{-- Meta --}}
                         <div class="meta__container">
 
@@ -213,7 +199,7 @@
                                 <span><i class="fa-solid fa-snowflake"></i></span>
                             </label>
 
-                            <input type="text" name="slug" value="{{ old('slug') }}">
+                            <input type="text" name="slug" id="slug" value="{{ old('slug') }}">
                         </div>
 
                         <div class="input__group full px-0">

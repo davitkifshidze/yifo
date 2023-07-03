@@ -1,20 +1,13 @@
 tinymce.init({
     selector: '.text_tinymce',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-    toolbar: 'undo redo | fontsize | bold italic underline | link image table | align | numlist bullist  ',
-    buttons: "Upload ImgPen",
-    a11y_advanced_options: true,
-    menubar: false,
+    plugins: 'code anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    toolbar: 'undo redo | fontsize | bold italic underline | link image table | align | numlist bullist | code ',
+    menubar: true,
     height : "235",
     width : "100%",
 
-
-    file_picker_types: 'file image media',
-    image_uploadtab: true,
     images_file_types: 'jpg,png,svg,webp',
-
     image_title: true,
-    automatic_uploads: true,
 
     file_picker_callback: function (cb, value, meta) {
         var input = document.createElement('input');
@@ -40,4 +33,5 @@ tinymce.init({
 
         input.click();
     },
+
 });
