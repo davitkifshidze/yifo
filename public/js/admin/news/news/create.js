@@ -1,13 +1,13 @@
 /** Generate Slug */
-function generateSlug(inputValue) {
-    let transliteratedValue = inputValue.replace(/[\u10D0-\u10FA]/g, function (match) {
-        let transliterationTable = {
+function generateSlug(input_value) {
+    let transliterated_value = input_value.replace(/[\u10D0-\u10FA]/g, function (match) {
+        let transliteration_data = {
             'ა': 'a', 'ბ': 'b', 'გ': 'g', 'დ': 'd', 'ე': 'e', 'ვ': 'v', 'ზ': 'z', 'თ': 't', 'ი': 'i', 'კ': 'k', 'ლ': 'l', 'მ': 'm', 'ნ': 'n', 'ო': 'o', 'პ': 'p', 'ჟ': 'zh', 'რ': 'r', 'ს': 's', 'ტ': 't', 'უ': 'u', 'ფ': 'f', 'ქ': 'q', 'ღ': 'gh', 'ყ': 'y', 'შ': 'sh', 'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 'წ': 'ts', 'ჭ': 'ch', 'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
         };
-        return transliterationTable[match];
+        return transliteration_data[match];
     });
-    let normalizedValue = transliteratedValue.normalize('NFC');
-    let slug = normalizedValue.replace(/[,.!?'"]/g, '').replace(/[\s]/g, '-');
+    let normalized_value = transliterated_value.normalize('NFC');
+    let slug = normalized_value.replace(/[,.!?'"]/g, '').replace(/[\s]/g, '-');
     slug = slug.replace(/[^a-zA-Z0-9-_]/g, '');
 
     return slug.toLowerCase();
@@ -35,17 +35,26 @@ title_inputs.forEach(function(title_input) {
     title_input.addEventListener("input", make_slug);
 });
 
+/** Slug Edit */
+const slug_edit = document.querySelector('.slug__edit');
+slug_edit.addEventListener('click', function() {
+    slug_input.removeAttribute('readonly');
+    slug_input.style.cursor = 'text';
+    slug_input.style.background = 'none';
+});
+slug_input.addEventListener("input", make_slug);
+
 /**
  * Select Multiple Create Author
  * Set Dropdown with SearchBox via dropdownAdapter option
  */
-var Utils = $.fn.select2.amd.require('select2/utils');
-var Dropdown = $.fn.select2.amd.require('select2/dropdown');
-var DropdownSearch = $.fn.select2.amd.require('select2/dropdown/search');
-var CloseOnSelect = $.fn.select2.amd.require('select2/dropdown/closeOnSelect');
-var AttachBody = $.fn.select2.amd.require('select2/dropdown/attachBody');
+const Utils = $.fn.select2.amd.require('select2/utils');
+const Dropdown = $.fn.select2.amd.require('select2/dropdown');
+const DropdownSearch = $.fn.select2.amd.require('select2/dropdown/search');
+const CloseOnSelect = $.fn.select2.amd.require('select2/dropdown/closeOnSelect');
+const AttachBody = $.fn.select2.amd.require('select2/dropdown/attachBody');
 
-var dropdownAdapter = Utils.Decorate(Utils.Decorate(Utils.Decorate(Dropdown, DropdownSearch), CloseOnSelect), AttachBody);
+const dropdownAdapter = Utils.Decorate(Utils.Decorate(Utils.Decorate(Dropdown, DropdownSearch), CloseOnSelect), AttachBody);
 
 $("#create__author__select").select2({
     dropdownAdapter: dropdownAdapter,
@@ -68,7 +77,7 @@ $("#create__author__select").select2({
 $("#create__category__select").select2({
     dropdownAdapter: dropdownAdapter,
     minimumResultsForSearch: 0,
-    placeholder: "აირჩიეთ ავტორი",
+    placeholder: "აირჩიეთ კატეგორია",
     allowClear: true,
     "language": {
         "noResults": function(){
@@ -100,6 +109,12 @@ function readURL(input_image, output_image_id) {
             const output_image = document.getElementById(output_image_id);
             if (output_image) {
                 output_image.src = e.target.result;
+
+                const info_paragraph = document.getElementById("info_" + input_image.getAttribute("data-locale"));
+                if (info_paragraph) {
+                    info_paragraph.style.display = "none";
+                }
+
             }
         };
         reader.readAsDataURL(input_image.files[0]);

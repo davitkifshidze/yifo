@@ -17,8 +17,8 @@
 
 @section('content')
 
-    <div class="create__post__container">
-        <div class="title__container">
+    <div class="create__page__container">
+        <div class="create__page__header">
             <p class="create__title">
                 {{ __('admin.create_news') }}
             </p>
@@ -199,7 +199,12 @@
                                 <span><i class="fa-solid fa-snowflake"></i></span>
                             </label>
 
-                            <input type="text" name="slug" id="slug" value="{{ old('slug') }}">
+                            <div class="slug__container">
+                                <input type="text" name="slug" id="slug" value="{{ old('slug') }}" readonly>
+                                <div class="slug__edit">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="input__group full px-0">
