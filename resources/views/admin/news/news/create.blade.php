@@ -63,7 +63,7 @@
                                     <p>{{ __('admin.tag') }}</p>
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
-                                <input type="text" class="tag__input" name="tags[{{ $localeCode }}]" placeholder="{{ __('admin.write_tag') }}" value="{{ old('tags') }}">
+                                <input type="text" class="tag__input" name="tag[{{ $localeCode }}]" placeholder="{{ __('admin.write_tag') }}" value="{{ old('tag') }}">
                             </div>
 
                         </div>

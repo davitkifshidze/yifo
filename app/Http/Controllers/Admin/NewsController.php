@@ -41,14 +41,16 @@ class NewsController extends Controller
     public function create()
     {
 
-        $authors = Author::select('authors.id', 'authors.slug', 'author_translations.locale', 'author_translations.name')
+        $authors = Author::select('authors.id', 'authors.slug', 'author_translations.locale', 'author_translations.name', 'authors.publish')
             ->join('author_translations', 'author_translations.author_id', '=', 'authors.id')
             ->where('author_translations.locale', '=', LaravelLocalization::getCurrentLocale())
+            ->where('authors.publish', '=', 1)
             ->get();
 
-        $categories = Category::select('categories.id', 'categories.slug', 'category_translations.locale', 'category_translations.name')
+        $categories = Category::select('categories.id', 'categories.slug', 'category_translations.locale', 'category_translations.name', 'categories.publish')
             ->join('category_translations', 'category_translations.category_id', '=', 'categories.id')
             ->where('category_translations.locale', '=', LaravelLocalization::getCurrentLocale())
+            ->where('categories.publish', '=', 1)
             ->get();
 
         return view('admin.news.news.create', compact('authors', 'categories'));
@@ -60,11 +62,6 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         
-        
-        dd($request);
-
-        $locale = LaravelLocalization::getCurrentLocale();
-
         $news = new News();
         $news->slug = $request->slug;
         $news->publish = ($request->publish == 'on') ? 1 : 0;
@@ -84,10 +81,12 @@ class NewsController extends Controller
             Storage::makeDirectory($path, 0777, true);
         }
 
-        $image_name = Str::random(20) . '.' . $request->image->getClientOriginalExtension();
-        $image_path = $year . '/' . $month . '/' . $image_name;
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local):
+            $image_name[$localeCode] = Str::random(20) . '.' . $request->image[$localeCode]->getClientOriginalExtension();
+            $image_path[$localeCode] = $year . '/' . $month . '/' . $image_name[$localeCode];
+            Storage::putFileAs($path, $request->image[$localeCode], $image_name[$localeCode]);
+        endforeach;
 
-        Storage::putFileAs($path, $request->image, $image_name);
 
         /**
          * Create Thumbnail
@@ -108,7 +107,6 @@ class NewsController extends Controller
             ]
         ];
 
-
         $thumbnail_data = [];
 
         foreach ($thumbnail_size_list as $folder => $size):
@@ -118,35 +116,35 @@ class NewsController extends Controller
                 Storage::makeDirectory($thumbnai_path, 0777, true);
             }
 
-            $thumb_image_path = $year . '/' . $month . '/thumb/' . $folder . '/' . $image_name;
+            foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local):
+                $thumb_image_path[$localeCode] = $year . '/' . $month . '/thumb/' . $folder . '/' . $image_name[$localeCode];
+                $thumbnail_data[$localeCode][$folder] = $thumb_image_path[$localeCode];
 
-            $thumbnail_data[$folder] = $thumb_image_path;
+                $thumbnail_image_path[$localeCode] = $thumbnai_path . '/' . $image_name[$localeCode];
 
-            $thumbnail_image_path = $thumbnai_path . '/' . $image_name;
-            Image::make(storage_path('app/' . $path . '/' . $image_name))
-                ->fit($size['width'], $size['height'])
-                ->save(storage_path('app/' . $thumbnail_image_path));
+                Image::make(storage_path('app/' . $path . '/' . $image_name[$localeCode]))
+                    ->fit($size['width'], $size['height'])
+                    ->save(storage_path('app/' . $thumbnail_image_path[$localeCode]));
+            endforeach;
 
         endforeach;
 
-        $thumbnail_serialize = serialize($thumbnail_data);
 
-        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local) {
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local):
 
-            $translation = new NewsTranslation([
+            $translation[$localeCode] = new NewsTranslation([
                 'locale' => $localeCode,
-                'title' => ($localeCode == $locale) ? $request->title : null,
-                'intro' => ($localeCode == $locale) ? $request->intro : null,
-                'text' => ($localeCode == $locale) ? $request->text : null,
-                'image' => ($localeCode == $locale) ? $image_path : null,
-                'thumb_image' => ($localeCode == $locale) ? $thumbnail_serialize : null,
-                'tag' => ($localeCode == $locale) ? $request->tags : null,
+                'title' => $request->title[$localeCode] ?? null,
+                'intro' => $request->intro[$localeCode] ?? null,
+                'text' => $request->text[$localeCode] ?? null,
+                'tag' => $request->tag[$localeCode] ?? null,
+                'image' => $request->image[$localeCode] ? $image_path[$localeCode] : null ,
+                'thumb_image' => $request->image[$localeCode] ? serialize($thumbnail_data[$localeCode]) : null ,
             ]);
 
-            $news->translations()->save($translation);
+            $news->translations()->save($translation[$localeCode]);
 
-        }
-
+        endforeach;
 
         if (!empty($request->author)):
             $authors_data = array_values($request->author);
