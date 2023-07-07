@@ -45,6 +45,38 @@ slug_edit.addEventListener('click', function() {
 slug_input.addEventListener("input", make_slug);
 
 /**
+ * Show Uploaded Image
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    const uploadInput = document.querySelector('#upload');
+    uploadInput.addEventListener('change', function () {
+        readURL(uploadInput);
+    });
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+
+            $('#imageResult').attr('src', e.target.result);
+
+            const info_image = document.getElementById("info");
+            if (info_image) {
+                info_image.style.display = "none";
+            }
+
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function open_input(input_id) {
+    document.getElementById(input_id).click();
+}
+
+/**
  * Show Hide Tabs [ Meta ]
  */
 const tabs = document.querySelectorAll('[data-tab]');
@@ -107,3 +139,5 @@ lang_tabs.forEach(active_tab => {
         activeTab.click();
     });
 });
+
+

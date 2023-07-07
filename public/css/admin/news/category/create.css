@@ -177,6 +177,46 @@
     color: var(--white);
 }
 
+
+/* Image Upload */
+.image__container {
+    border-radius: 15px;
+    background-color: var(--white);
+}
+
+.upload__image__container {
+    padding: 20px 0;
+    max-height: fit-content;
+}
+
+.upload__img {
+    display: none;
+}
+
+.image__area {
+    border: 2px dashed var(--gray);
+    padding: 1rem;
+    margin-top: 10px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image__area:hover{
+    border: 2px dashed var(--green-btn);
+    cursor: pointer;
+}
+.image__area:hover .image__area__info{
+    color: var(--green-btn);
+}
+
+.image__area img {
+    height: 100%;
+    z-index: 2;
+    position: relative;
+}
+
 /* Switch Toggle Box */
 .switch__container {
     width: 100%;
@@ -392,4 +432,4 @@ input:checked + .slider:before {
 
 }
 
-/* End Create Category */
+/* End Create */

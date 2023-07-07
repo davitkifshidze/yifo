@@ -78,36 +78,36 @@
 
                             <div class="meta__navigation">
                                 <ul>
-                                    <li data-tab="news_{{$localeCode}}" class="active__tab">{{ __('admin.category_meta') }}</li>
+                                    <li data-tab="category_{{$localeCode}}" class="active__tab">{{ __('admin.category_meta') }}</li>
                                     <li data-tab="facebook_{{$localeCode}}">{{ __('admin.facebook_meta') }}</li>
                                     <li data-tab="tweeter_{{$localeCode}}">{{ __('admin.twitter_meta') }}</li>
                                 </ul>
                             </div>
 
-                            <div class="meta__section show" data-tab-content="news_{{$localeCode}}">
+                            <div class="meta__section show" data-tab-content="category_{{$localeCode}}">
                                 <div class="input__group full px-0">
-                                    <label for="news_meta_title" class="label">
+                                    <label for="category_meta_title" class="label">
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="news_meta_title[{{ $localeCode }}]" value="{{ old('news_meta_title') }}">
+                                    <input type="text" name="category_meta_title[{{ $localeCode }}]" value="{{ old('category_meta_title') }}">
                                 </div>
 
                                 <div class="input__group full px-0">
-                                    <label for="news_meta_keywords" class="label">
+                                    <label for="category_meta_keywords" class="label">
                                         <p>{{ __('admin.keywords') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="news_meta_keywords[{{ $localeCode }}]" value="{{ old('news_meta_keywords') }}">
+                                    <input type="text" name="category_meta_keywords[{{ $localeCode }}]" value="{{ old('category_meta_keywords') }}">
                                 </div>
 
                                 <div class="input__group full px-0">
-                                    <label for="news_meta_description" class="label">
+                                    <label for="category_meta_description" class="label">
                                         <p>{{ __('admin.description') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
 
-                                    <textarea name="news_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('news_meta_description') }}</textarea>
+                                    <textarea name="category_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('category_meta_description') }}</textarea>
                                 </div>
                             </div>
 
@@ -157,7 +157,7 @@
 
                 <div class="non__translatable">
 
-                    <!-- Slug & Date & Author & Category & Status -->
+                    {{-- Slug & Image & Publish--}}
                     <div class="form__group column">
 
                         <div class="input__group full px-0">
@@ -170,6 +170,18 @@
                                 <input type="text" name="slug" id="slug" value="{{ old('slug') }}" readonly>
                                 <div class="slug__edit">
                                     <i class="fa-regular fa-pen-to-square"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="image__container full px-0">
+                            <div class="upload__image__container">
+                                <!-- Upload image input-->
+                                <input id="upload" type="file" class="upload__img" onchange="readURL(this);" name="image" value="{{ old('image') }}">
+                                <!-- Uploaded image area-->
+                                <div class="image__area" onclick="open_input('upload')">
+                                    <p class="image__area__info" id="info">ატვირთეთ სურათი</p>
+                                    <img id="imageResult"src="#" alt="">
                                 </div>
                             </div>
                         </div>
@@ -190,7 +202,7 @@
                     <div class="create__submit__container">
                         <input type="submit" value="{{ __('admin.save') }}" class="create__btn">
 
-                        <a href="{{ route('news_list') }}" class="cancel__btn">
+                        <a href="{{ route('category_list') }}" class="cancel__btn">
                             {{ __('admin.cancel') }}
                         </a>
                     </div>

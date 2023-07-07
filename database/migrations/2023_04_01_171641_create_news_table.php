@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->timestamp('publish_date')->nullable();
             $table->boolean('publish')->default(true);
+            $table->integer('views')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

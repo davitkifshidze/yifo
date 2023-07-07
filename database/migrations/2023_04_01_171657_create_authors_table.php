@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->string('slug');
+            $table->string('image',254)->nullable()->default(NULL);
+            $table->text('thumb_image')->nullable()->default(NULL);
             $table->string('email');
             $table->string('facebook');
             $table->boolean('publish')->default(true);

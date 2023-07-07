@@ -22,6 +22,13 @@ class NewsTranslation extends Model
         'image',
         'thumb_image',
         'tag',
+        'news_meta_title',
+        'news_meta_keywords',
+        'news_meta_description',
+        'facebook_meta_title',
+        'facebook_meta_description',
+        'twitter_meta_title',
+        'twitter_meta_description',
     ];
 
     public function news(): BelongsTo
