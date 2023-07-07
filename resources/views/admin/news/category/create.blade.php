@@ -42,7 +42,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('store_category') }}" method="POST" class="create__form">
+            <form action="{{ route('store_category') }}" method="POST" class="create__form" enctype="multipart/form-data">
 
                 @csrf
 
@@ -50,14 +50,14 @@
 
                     <div class="translatable hide" data-lang-container="{{ $localeCode }}">
 
-                        {{-- Title --}}
+                        {{-- Name --}}
                         <div class="form__group row">
                             <div class="input__group full">
-                                <label for="title" class="label">
+                                <label for="name" class="label">
                                     <p>{{ __('admin.title') }}</p>
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
-                                <input type="text" name="title[{{ $localeCode }}]" data-lang="{{ $localeCode }}" value="{{ old('title') }}">
+                                <input type="text" name="name[{{ $localeCode }}]" data-lang="{{ $localeCode }}" value="{{ old('name') }}">
                             </div>
                         </div>
 

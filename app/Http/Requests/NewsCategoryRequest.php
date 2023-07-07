@@ -29,14 +29,14 @@ class NewsCategoryRequest extends FormRequest
         if ($this->isMethod('post')) {
 
             return [
-                'name' => 'required|string|min:3|max:64',
+                'name' => 'required|text|min:3|max:64',
                 'description' => 'max:1024',
                 'slug' => 'required|unique:categories,slug',
             ];
         } else {
 
             return [
-                'name' => 'required|string|min:3|max:64',
+                'name' => 'required|text|min:3|max:64',
                 'description' => 'max:1024',
                 'slug' => [
                     'required',

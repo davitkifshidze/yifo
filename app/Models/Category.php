@@ -21,6 +21,8 @@ class Category extends Model
 
     protected $fillable = [
         'slug',
+        'image',
+        'thumb_image',
         'publish',
     ];
 

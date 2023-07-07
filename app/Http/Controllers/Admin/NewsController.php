@@ -129,7 +129,6 @@ class NewsController extends Controller
 
         endforeach;
 
-
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local):
 
             $translation[$localeCode] = new NewsTranslation([

@@ -26,13 +26,13 @@ function make_slug(event) {
     }
 }
 
-/** Title convert to Slug */
-let title_inputs = document.querySelectorAll("[name^='title']");
+/** Name convert to Slug */
+let name_inputs = document.querySelectorAll("[name^='name']");
 let slug_input = document.querySelector("#slug");
 let current_language = '';
 
-title_inputs.forEach(function(title_input) {
-    title_input.addEventListener("input", make_slug);
+name_inputs.forEach(function(name_input) {
+    name_input.addEventListener("input", make_slug);
 });
 
 /** Slug Edit */
