@@ -41,6 +41,7 @@ return [
     'chose_file' => 'Chose File',
     'keywords' => 'Keywords',
     'news_meta' => 'News Meta',
+    'category_meta' => 'Category Meta',
     'facebook_meta' => 'Facebook Meta',
     'twitter_meta' => 'Twitter Meta',
 

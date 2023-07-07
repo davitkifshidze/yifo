@@ -41,6 +41,7 @@ return [
     'chose_file' => 'აირჩიე ფაილი',
     'keywords' => 'საკვანძო სიტყვები',
     'news_meta' => 'სიახლის მეტა',
+    'category_meta' => 'კატეგორიის მეტა',
     'facebook_meta' => 'ფეისბუქის მეტა',
     'twitter_meta' => 'ტვიტერის მეტა',
 

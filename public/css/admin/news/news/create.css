@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: row;
 }
+
 .lang__tab{
     padding: 5px 10px;
     border: 1px solid var(--green-dark);
@@ -29,6 +30,7 @@
     margin-left: 10px;
     background-color:white;
 }
+
 .active__lang{
     padding: 5px 10px;
     background-color: var(--green-dark) !important;
@@ -96,6 +98,7 @@
     align-items: flex-start;
     width: 50%;
     padding-right: 25px;
+    padding-left: 0;
 }
 
 .full {
@@ -314,7 +317,7 @@
     display: none;
 }
 
-/* Check Box */
+/* Switch Toggle Box */
 .switch__container {
     width: 100%;
     padding: 15px 0;
@@ -467,7 +470,7 @@ input:checked + .slider:before {
     margin-top: 20px;
 }
 
-.create__post__btn{
+.create__btn{
     padding: 5px 20px;
     background-color: var(--green-btn);
     color: var(--white);
@@ -477,7 +480,7 @@ input:checked + .slider:before {
     font-family: var(--font-Noto-Sans-Georgian);
 }
 
-.cancel__post__btn{
+.cancel__btn{
     padding: 5px 20px;
     background-color: var(--bs-red);
     color: var(--white);

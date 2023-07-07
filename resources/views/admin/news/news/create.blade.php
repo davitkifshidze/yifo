@@ -68,7 +68,7 @@
 
                         </div>
 
-                        {{-- Intro & Content --}}
+                        {{-- Intro --}}
                         <div class="form__group row">
                             <div class="input__group full">
                                 <label for="intro" class="label">
@@ -76,7 +76,7 @@
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
 
-                                <textarea class="intro_tinymce" name="intro[{{ $localeCode }}]">{{ old('intro') }}</textarea>
+                                <textarea name="intro[{{ $localeCode }}]">{{ old('intro') }}</textarea>
                             </div>
                         </div>
 
@@ -258,9 +258,9 @@
                     </div>
 
                     <div class="create__submit__container">
-                        <input type="submit" value="{{ __('admin.save') }}" class="create__post__btn">
+                        <input type="submit" value="{{ __('admin.save') }}" class="create__btn">
 
-                        <a href="{{ route('news_list') }}" class="cancel__post__btn">
+                        <a href="{{ route('news_list') }}" class="cancel__btn">
                             {{ __('admin.cancel') }}
                         </a>
                     </div>
