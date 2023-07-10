@@ -1,76 +1,235 @@
-<div id="create__author" class="author__modal">
+@extends('admin.layouts.main_template')
 
-    <div class="modal__content">
-        <div class="modal__header">
-            <p class="modal__title">{{ __('admin.create_author') }}</p>
-            <span class="create__close" onclick="closeModal('create__author')">&times;</span>
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/admin/fonts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/responsive.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/admin/news/author/create.css') }}">
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/admin/main.js') }}"></script>
+    <script src="{{ asset('js/admin/news/author/create.js') }}"></script>
+
+@endsection
+
+@section('content')
+
+    <div class="create__page__container">
+        <div class="create__page__header">
+            <p class="create__title">
+                {{ __('admin.create_author') }}
+            </p>
+
+            <div class="lang__tabs">
+                <a class="lang__tab active__lang" data-lang="ka" href="javascript:void(0)">Ka</a>
+                <a class="lang__tab" data-lang="en" href="javascript:void(0)">En</a>
+            </div>
         </div>
-        <div class="modal__body">
 
-            <form action="" method="post">
+        <div class="form__container">
 
-                <div class="form__group">
-                    <div class="input__group">
-                        <label for="name" class="label">
-                            <p>{{ __('admin.name') }}</p>
-                            <span><i class="fa-solid fa-snowflake"></i></span>
-                        </label>
-                        <input type="text" id="name" name="name">
-                    </div>
-                    <div class="input__group">
-                        <label for="slug" class="label">
-                            <p>{{ __('admin.slug') }}</p>
-                            <span><i class="fa-solid fa-snowflake"></i></span>
-                        </label>
-                        <input type="text" id="slug" name="slug">
-                    </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
+            @endif
 
-                <div class="form__group">
-                    <div class="input__group__full">
-                        <label for="description" class="label">
-                            <p>{{ __('admin.description') }}</p>
-                            <span><i class="fa-solid fa-snowflake"></i></span>
-                        </label>
-                        <textarea name="description" id="description" cols="20" rows="5"></textarea>
+            <form action="{{ route('store_author') }}" method="POST" class="create__form"  enctype="multipart/form-data">
+                
+                @csrf
+
+                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local)
+
+                    <div class="translatable hide" data-lang-container="{{ $localeCode }}">
+
+                        {{-- Name --}}
+                        <div class="form__group row">
+                            <div class="input__group full">
+                                <label for="name" class="label">
+                                    <p>{{ __('admin.name') }}</p>
+                                    <span><i class="fa-solid fa-snowflake"></i></span>
+                                </label>
+                                <input type="text" name="name[{{ $localeCode }}]" data-lang="{{ $localeCode }}" value="{{ old('name') }}">
+                            </div>
+                        </div>
+
+                        {{-- Intro --}}
+                        <div class="form__group row">
+                            <div class="input__group full">
+                                <label for="description" class="label">
+                                    <p>{{ __('admin.description') }}</p>
+                                    <span><i class="fa-solid fa-snowflake"></i></span>
+                                </label>
+
+                                <textarea name="description[{{ $localeCode }}]">{{ old('description') }}</textarea>
+                            </div>
+                        </div>
+
+                        {{-- Meta --}}
+                        <div class="meta__container mt-4">
+
+                            <div class="meta__navigation">
+                                <ul>
+                                    <li data-tab="author_{{$localeCode}}" class="active__tab">{{ __('admin.author_meta') }}</li>
+                                    <li data-tab="facebook_{{$localeCode}}">{{ __('admin.facebook_meta') }}</li>
+                                    <li data-tab="tweeter_{{$localeCode}}">{{ __('admin.twitter_meta') }}</li>
+                                </ul>
+                            </div>
+
+                            <div class="meta__section show" data-tab-content="author_{{$localeCode}}">
+                                <div class="input__group full px-0">
+                                    <label for="author_meta_title" class="label">
+                                        <p>{{ __('admin.title') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="meta_title[{{ $localeCode }}]" value="{{ old('meta_title') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="author_meta_keywords" class="label">
+                                        <p>{{ __('admin.keywords') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="meta_keywords[{{ $localeCode }}]" value="{{ old('meta_keywords') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="author_meta_description" class="label">
+                                        <p>{{ __('admin.description') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+
+                                    <textarea name="meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('meta_description') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="meta__section hide" data-tab-content="facebook_{{$localeCode}}">
+                                <div class="input__group full px-0">
+                                    <label for="facebook_meta_title" class="label">
+                                        <p>{{ __('admin.title') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="facebook_meta_title[{{ $localeCode }}]" value="{{ old('facebook_meta_title') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="facebook_meta_description" class="label">
+                                        <p>{{ __('admin.description') }}</p>
+                                        <span><i class="fa-solid fa-snowflake[{{ $localeCode }}]"></i></span>
+                                    </label>
+
+                                    <textarea name="facebook_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('facebook_meta_description') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="meta__section hide" data-tab-content="tweeter_{{$localeCode}}">
+                                <div class="input__group full px-0">
+                                    <label for="twitter_meta_title" class="label">
+                                        <p>{{ __('admin.title') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+                                    <input type="text" name="twitter_meta_title[{{ $localeCode }}]" value="{{ old('twitter_meta_title') }}">
+                                </div>
+
+                                <div class="input__group full px-0">
+                                    <label for="twitter_meta_description" class="label">
+                                        <p>{{ __('admin.description') }}</p>
+                                        <span><i class="fa-solid fa-snowflake"></i></span>
+                                    </label>
+
+                                    <textarea name="twitter_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('twitter_meta_description') }}</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="form__group">
-                    <div class="input__group">
-                        <label for="email" class="label">
-                            <p>{{ __('admin.email') }}</p>
-                        </label>
-                        <input type="text" id="email" name="email">
+                @endforeach
+
+                <div class="non__translatable">
+
+                    {{-- Slug & Image & Publish--}}
+                    <div class="form__group column">
+
+                        <div class="input__group full px-0">
+                            <label for="slug" class="label">
+                                <p>{{ __('admin.slug') }}</p>
+                                <span><i class="fa-solid fa-snowflake"></i></span>
+                            </label>
+
+                            <div class="slug__container">
+                                <input type="text" name="slug" id="slug" value="{{ old('slug') }}" readonly>
+                                <div class="slug__edit">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="image__container full px-0">
+                            <div class="upload__image__container">
+                                <!-- Upload image input-->
+                                <input id="upload" type="file" class="upload__img" onchange="readURL(this);" name="image" value="{{ old('image') }}">
+                                <!-- Uploaded image area-->
+                                <div class="image__area" onclick="open_input('upload')">
+                                    <p class="image__area__info" id="info">ატვირთეთ სურათი</p>
+                                    <img id="imageResult"src="#" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input__group full px-0">
+                            <label for="email" class="label">
+                                <p>{{ __('admin.email') }}</p>
+                            </label>
+                            <input type="text" id="email" name="email" value="{{ old('email') }}">
+                        </div>
+
+                        <div class="input__group  full px-0">
+                            <label for="facebook" class="label">
+                                <p>{{ __('admin.facebook') }}</p>
+                            </label>
+                            <input type="text" id="facebook" name="facebook" value="{{ old('facebook') }}">
+                        </div>
+
+                        <div class="input__group full">
+                            <div class="switch__container">
+                                <label class="switch">
+                                    <input type="checkbox" name="publish" id="publish" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <p>{{ __('admin.publish_author') }}</p>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="input__group">
-                        <label for="facebook" class="label">
-                            <p>{{ __('admin.facebook') }}</p>
-                        </label>
-                        <input type="text" id="facebook" name="facebook">
+
+
+                    <div class="create__submit__container">
+                        <input type="submit" value="{{ __('admin.save') }}" class="create__btn">
+
+                        <a href="{{ route('author_list') }}" class="cancel__btn">
+                            {{ __('admin.cancel') }}
+                        </a>
                     </div>
+
                 </div>
-
-                <div class="form__group">
-                    <div class="switch__container">
-                        <label class="switch">
-                            <input type="checkbox" name="publish" id="publish" checked>
-                            <span class="slider round"></span>
-                        </label>
-                        <p>{{ __('admin.publish_author') }}</p>
-                    </div>
-                </div>
-
-
-                <div class="form__buttons">
-                    <input class="modal__btn" type="submit" name="create" value="{{ __('admin.create') }}">
-                    <p></p>
-                </div>
-
 
             </form>
-
         </div>
+
     </div>
 
-</div>
+@endsection
+
+
+
+
+
