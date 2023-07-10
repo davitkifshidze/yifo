@@ -137,9 +137,9 @@ class NewsController extends Controller
                 'intro' => $request->intro[$localeCode] ?? null,
                 'text' => $request->text[$localeCode] ?? null,
                 'tag' => $request->tag[$localeCode] ?? null,
-                'news_meta_title' => $request->news_meta_title[$localeCode] ?? null,
-                'news_meta_keywords' => $request->news_meta_keywords[$localeCode] ?? null,
-                'news_meta_description' => $request->news_meta_description[$localeCode] ?? null,
+                'meta_title' => $request->meta_title[$localeCode] ?? null,
+                'meta_keywords' => $request->meta_keywords[$localeCode] ?? null,
+                'meta_description' => $request->meta_description[$localeCode] ?? null,
                 'facebook_meta_title' => $request->facebook_meta_title[$localeCode] ?? null,
                 'facebook_meta_description' => $request->facebook_meta_description[$localeCode] ?? null,
                 'twitter_meta_title' => $request->twitter_meta_title[$localeCode] ?? null,
@@ -151,8 +151,6 @@ class NewsController extends Controller
             $news->translations()->save($translation[$localeCode]);
 
         endforeach;
-
-        dd($translation);
 
         if (!empty($request->author)):
             $authors_data = array_values($request->author);
@@ -175,10 +173,6 @@ class NewsController extends Controller
                 ]);
             endif;
         endif;
-
-
-
-
 
         return redirect(route('news_list'));
     }

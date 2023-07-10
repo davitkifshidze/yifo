@@ -23,9 +23,9 @@ return new class extends Migration
             $table->text('text')->nullable()->default(NULL);
             $table->string('image',254)->nullable()->default(NULL);
             $table->text('thumb_image')->nullable()->default(NULL);
-            $table->string('news_meta_title',254)->nullable()->default(NULL);
-            $table->text('news_meta_keywords')->nullable()->default(NULL);
-            $table->text('news_meta_description')->nullable()->default(NULL);
+            $table->string('meta_title',254)->nullable()->default(NULL);
+            $table->text('meta_keywords')->nullable()->default(NULL);
+            $table->text('meta_description')->nullable()->default(NULL);
             $table->string('facebook_meta_title', 254)->nullable()->default(NULL);
             $table->text('facebook_meta_description')->nullable()->default(NULL);
             $table->string('twitter_meta_title', 254)->nullable()->default(NULL);

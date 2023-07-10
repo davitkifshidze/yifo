@@ -86,28 +86,28 @@
 
                             <div class="meta__section show" data-tab-content="category_{{$localeCode}}">
                                 <div class="input__group full px-0">
-                                    <label for="category_meta_title" class="label">
+                                    <label for="meta_title" class="label">
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="category_meta_title[{{ $localeCode }}]" value="{{ old('category_meta_title') }}">
+                                    <input type="text" name="meta_title[{{ $localeCode }}]" value="{{ old('meta_title') }}">
                                 </div>
 
                                 <div class="input__group full px-0">
-                                    <label for="category_meta_keywords" class="label">
+                                    <label for="meta_keywords" class="label">
                                         <p>{{ __('admin.keywords') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="category_meta_keywords[{{ $localeCode }}]" value="{{ old('category_meta_keywords') }}">
+                                    <input type="text" name="meta_keywords[{{ $localeCode }}]" value="{{ old('meta_keywords') }}">
                                 </div>
 
                                 <div class="input__group full px-0">
-                                    <label for="category_meta_description" class="label">
+                                    <label for="meta_description" class="label">
                                         <p>{{ __('admin.description') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
 
-                                    <textarea name="category_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('category_meta_description') }}</textarea>
+                                    <textarea name="meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('meta_description') }}</textarea>
                                 </div>
                             </div>
 

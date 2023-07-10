@@ -118,28 +118,28 @@
 
                             <div class="meta__section show" data-tab-content="news_{{$localeCode}}">
                                 <div class="input__group full px-0">
-                                    <label for="news_meta_title" class="label">
+                                    <label for="meta_title" class="label">
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="news_meta_title[{{ $localeCode }}]" value="{{ old('news_meta_title') }}">
+                                    <input type="text" name="meta_title[{{ $localeCode }}]" value="{{ old('meta_title') }}">
                                 </div>
 
                                 <div class="input__group full px-0">
-                                    <label for="news_meta_keywords" class="label">
+                                    <label for="meta_keywords" class="label">
                                         <p>{{ __('admin.keywords') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="news_meta_keywords[{{ $localeCode }}]" value="{{ old('news_meta_keywords') }}">
+                                    <input type="text" name="meta_keywords[{{ $localeCode }}]" value="{{ old('meta_keywords') }}">
                                 </div>
 
                                 <div class="input__group full px-0">
-                                    <label for="news_meta_description" class="label">
+                                    <label for="meta_description" class="label">
                                         <p>{{ __('admin.description') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
 
-                                    <textarea name="news_meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('news_meta_description') }}</textarea>
+                                    <textarea name="meta_description[{{ $localeCode }}]" cols="30" rows="5">{{ old('meta_description') }}</textarea>
                                 </div>
                             </div>
 

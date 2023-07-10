@@ -19,9 +19,9 @@ return new class extends Migration
 
             $table->string('name')->nullable()->default(NULL);
             $table->string('description')->nullable()->default(NULL);
-            $table->string('category_meta_title',254)->nullable()->default(NULL);
-            $table->text('category_meta_keywords')->nullable()->default(NULL);
-            $table->text('category_meta_description')->nullable()->default(NULL);
+            $table->string('meta_title',254)->nullable()->default(NULL);
+            $table->text('meta_keywords')->nullable()->default(NULL);
+            $table->text('meta_description')->nullable()->default(NULL);
             $table->string('facebook_meta_title', 254)->nullable()->default(NULL);
             $table->text('facebook_meta_description')->nullable()->default(NULL);
             $table->string('twitter_meta_title', 254)->nullable()->default(NULL);
