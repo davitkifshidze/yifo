@@ -143,12 +143,27 @@ class AuthorController extends Controller
 
         $locale = LaravelLocalization::getCurrentLocale();
 
-        $author = Author::select('authors.id', 'authors.slug', 'authors.email', 'authors.facebook', 'authors.publish')
-            ->addSelect('author_translations.locale', 'author_translations.name', 'author_translations.author_id', 'author_translations.description')
-            ->join('author_translations', 'author_translations.author_id', '=', 'authors.id')
-            ->where('author_translations.locale', '=', $locale)
-            ->where('authors.id', '=', $id)
-            ->first();
+        foreach(LaravelLocalization::getSupportedLocales() as $locale_code => $locale):
+
+            $author[$locale_code] = Author::select('authors.id', 'authors.slug', 'authors.image', 'authors.thumb_image', 'authors.email', 'authors.facebook', 'authors.publish')
+                ->addSelect(
+                    'author_translations.id as translation_id',
+                    'author_translations.locale',
+                    'author_translations.name',
+                    'author_translations.description',
+                    'author_translations.meta_title',
+                    'author_translations.meta_keywords',
+                    'author_translations.meta_description',
+                    'author_translations.facebook_meta_title',
+                    'author_translations.facebook_meta_description',
+                    'author_translations.twitter_meta_title',
+                    'author_translations.twitter_meta_description'
+                )
+                ->join('author_translations', 'author_translations.author_id', '=', 'authors.id')
+                ->where('author_translations.locale', '=', $locale_code)
+                ->where('authors.id', '=', $id)
+                ->first();
+        endforeach;
 
         return view('admin.news.author.edit', compact('author'));
 

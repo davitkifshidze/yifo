@@ -40,11 +40,9 @@ return [
     'chose_image' => 'აირჩიე სურათი',
     'chose_file' => 'აირჩიე ფაილი',
     'keywords' => 'საკვანძო სიტყვები',
-    'news_meta' => 'სიახლის მეტა',
-    'category_meta' => 'კატეგორიის მეტა',
     'facebook_meta' => 'ფეისბუქის მეტა',
     'twitter_meta' => 'ტვიტერის მეტა',
-
+    'upload_image' => 'ატვირთეთ სურათი',
 
     // Login
     'welcome' => 'გამარჯობა!!!',
@@ -58,16 +56,20 @@ return [
     'edit_author' => 'ავტორის რედაქტირება',
     'publish_author' => 'ავტორის ხილვადობა',
     'create_author' => 'ავოტორის შექმნა',
+    'author_meta' => 'ავოტორის მეტა',
 
     // Category
     'new_category' => 'ახალი კატეგორია',
     'create_category' => 'კატეგორიის შექმნა',
     'publish_category' => 'კატეგორიის ხილვადობა',
     'edit_category' => 'კატეგორიის რედაქტირება',
+    'category_meta' => 'კატეგორიის მეტა',
 
     // News
     'new_news' => 'ახალი სიახლე',
     'create_news' => 'სიახლის შექმნა',
     'publish_news' => 'სიახლის ხილვადობა',
+    'news_meta' => 'სიახლის მეტა',
+
 
 ];

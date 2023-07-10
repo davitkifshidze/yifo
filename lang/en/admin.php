@@ -40,10 +40,9 @@ return [
     'chose_image' => 'Chose Image',
     'chose_file' => 'Chose File',
     'keywords' => 'Keywords',
-    'news_meta' => 'News Meta',
-    'category_meta' => 'Category Meta',
     'facebook_meta' => 'Facebook Meta',
     'twitter_meta' => 'Twitter Meta',
+    'upload_image' => 'Upload Image',
 
     // Login
     'welcome' => 'Hello Again!!!',
@@ -57,15 +56,19 @@ return [
     'edit_author' => 'Edit Author',
     'publish_author' => 'Publish Author',
     'create_author' => 'Create Author',
+    'author_meta' => 'Author Meta',
 
+    // Category
     'new_category' => 'New Category',
     'create_category' => 'Create Category',
     'publish_category' => 'Publish Category',
     'edit_category' => 'Edit Category',
+    'category_meta' => 'Category Meta',
 
     // News
     'new_news' => 'New News',
     'create_news' => 'Create News',
     'publish_news' => 'Publish News',
+    'news_meta' => 'News Meta',
 
 ];

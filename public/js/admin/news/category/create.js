@@ -48,9 +48,9 @@ slug_input.addEventListener("input", make_slug);
  * Show Uploaded Image
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const uploadInput = document.querySelector('#upload');
-    uploadInput.addEventListener('change', function () {
-        readURL(uploadInput);
+    const upload_input = document.querySelector('#upload');
+    upload_input.addEventListener('change', function () {
+        readURL(upload_input);
     });
 });
 
