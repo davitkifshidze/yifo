@@ -42,6 +42,7 @@
             @endif
 
             <form action="{{ route('store_author') }}" method="POST" class="create__form"  enctype="multipart/form-data">
+                
                 @csrf
 
                 @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local)
