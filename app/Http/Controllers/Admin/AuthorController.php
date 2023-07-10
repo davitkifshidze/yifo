@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsAuthorRequest;
 use App\Models\Author;
 use App\Models\AuthorTranslations;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -37,22 +41,91 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NewsAuthorRequest $request)
+    public function store(Request $request)
     {
-        $locale = LaravelLocalization::getCurrentLocale();
 
         $author = new Author();
         $author->slug = $request->slug;
         $author->facebook = $request->facebook;
         $author->email = $request->email;
         $author->publish = $request->has('publish') ? 1 : 0 ;
+
+        /**
+         * Image Upload
+         */
+        $current_date = Carbon::now();
+        $month = $current_date->format('m');
+        $year = $current_date->format('Y');
+
+        $path = 'public/uploads/author/images/' . $year . '/' . $month;
+        if (!Storage::exists($path)) {
+            Storage::makeDirectory($path, 0777, true);
+        }
+
+        $image_name = Str::random(20) . '.' . $request->image->getClientOriginalExtension();
+        $image_path = $year . '/' . $month . '/' . $image_name;
+
+        Storage::putFileAs($path, $request->image, $image_name);
+
+        /**
+         * Create Thumbnail
+         */
+
+        $thumbnail_size_list = [
+            'small'=>[
+                'width'=>'100',
+                'height'=>'100',
+            ],
+            'medium'=>[
+                'width'=>'400',
+                'height'=>'400',
+            ],
+            'high'=>[
+                'width'=>'600',
+                'height'=>'600',
+            ]
+        ];
+
+        $thumbnail_data = [];
+
+        foreach ($thumbnail_size_list as $folder => $size):
+
+            $thumbnai_path = $path . '/thumb/' . $folder;
+            if (!Storage::exists($thumbnai_path)) {
+                Storage::makeDirectory($thumbnai_path, 0777, true);
+            }
+
+            $thumb_image_path = $year . '/' . $month . '/thumb/' . $folder . '/' . $image_name;
+
+            $thumbnail_data[$folder] = $thumb_image_path;
+
+            $thumbnail_image_path = $thumbnai_path . '/' . $image_name;
+            Image::make(storage_path('app/' . $path . '/' . $image_name))
+                ->fit($size['width'], $size['height'])
+                ->save(storage_path('app/' . $thumbnail_image_path));
+
+        endforeach;
+
+        $thumbnail_serialize = serialize($thumbnail_data);
+
+        $author->image = $request->image ? $image_path : null;
+        $author->thumb_image = $request->image ? $thumbnail_serialize : null;
+
         $author->save();
-        
+
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local):
             $translation = new AuthorTranslations([
                 'locale' => $localeCode,
-                'name' => ($localeCode == $locale) ? $request->name : null,
-                'description' => ($localeCode == $locale) ? $request->description : null,
+                'name' => $request->name[$localeCode] ?? null,
+                'description' => $request->description[$localeCode] ?? null,
+                'meta_title' => $request->meta_title[$localeCode] ?? null,
+                'meta_keywords' => $request->meta_keywords[$localeCode] ?? null,
+                'meta_description' => $request->meta_description[$localeCode] ?? null,
+                'facebook_meta_title' => $request->facebook_meta_title[$localeCode] ?? null,
+                'facebook_meta_description' => $request->facebook_meta_description[$localeCode] ?? null,
+                'twitter_meta_title' => $request->twitter_meta_title[$localeCode] ?? null,
+                'twitter_meta_description' => $request->twitter_meta_description[$localeCode] ?? null,
+
             ]);
             $author->translations()->save($translation);
 

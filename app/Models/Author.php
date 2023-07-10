@@ -18,11 +18,12 @@ class Author extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name',
-        'description',
-        'email',
+        'slug',
+        'image',
+        'thumb_image',
         'publish',
         'facebook',
+        'email',
     ];
 
     public function news(): BelongsToMany

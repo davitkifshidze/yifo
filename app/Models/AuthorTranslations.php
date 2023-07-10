@@ -14,6 +14,13 @@ class AuthorTranslations extends Model
         'locale',
         'name',
         'description',
+        'meta_title',
+        'meta_keywords',
+        'meta_description',
+        'facebook_meta_title',
+        'facebook_meta_description',
+        'twitter_meta_title',
+        'twitter_meta_description',
     ];
 
     public function category(): BelongsTo
