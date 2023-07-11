@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="{{ asset('css/admin/news/author/edit.css') }}">
 @endsection
 
-@section('header-script')
-    <script src="{{ asset('js/admin/app.js') }}"></script>
-@endsection
-
 @section('script')
     <script src="{{ asset('js/admin/main.js') }}"></script>
     <script src="{{ asset('js/admin/news/author/edit.js') }}"></script>
+@endsection
+
+@section('header-script')
+
 @endsection
 
 @section('content')

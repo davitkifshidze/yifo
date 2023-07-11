@@ -48,11 +48,13 @@
 
     {{--  Custom Style  --}}
     @yield('style')
+
+    {{--  Custom Global Js  --}}
+    <script src="{{ asset('js/admin/app.js') }}"></script>
     @yield('header-script')
 
 </head>
 <body>
-
 
 <div class="panel__page__template" id="page__template">
 
@@ -67,12 +69,10 @@
         </main>
 
     </div>
+
 </div>
 
-
-
-
-<!-- Custom Js -->
+{{-- Custom Js --}}
 @yield('script')
 
 </body>

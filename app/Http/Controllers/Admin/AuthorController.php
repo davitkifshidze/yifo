@@ -274,7 +274,7 @@ class AuthorController extends Controller
             $translation->save();
         }
 
-        return redirect()->route('edit_author',$id)->with( 'update', 'success' );
+        return redirect()->route('edit_author',$id)->with( ['update' => 'success'] );
 
     }
 
