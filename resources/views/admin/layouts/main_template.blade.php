@@ -46,8 +46,9 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
     <script src="{{ asset('assets/plugins/select2/js/select2.js') }}"></script>
 
-    <!-- Custom Style -->
+    {{--  Custom Style  --}}
     @yield('style')
+    @yield('header-script')
 
 </head>
 <body>

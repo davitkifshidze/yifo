@@ -9,13 +9,22 @@
     <link rel="stylesheet" href="{{ asset('css/admin/news/author/edit.css') }}">
 @endsection
 
+@section('header-script')
+    <script src="{{ asset('js/admin/app.js') }}"></script>
+@endsection
+
 @section('script')
     <script src="{{ asset('js/admin/main.js') }}"></script>
     <script src="{{ asset('js/admin/news/author/edit.js') }}"></script>
-
 @endsection
 
 @section('content')
+
+    @if(session('update'))
+        <script>
+            showMessage('success', '{{ __('admin.author_edit_success') }}' , 1000, 'top-end');
+        </script>
+    @endif
 
     <div class="edit__page__container">
         <div class="edit__page__header">
@@ -29,21 +38,22 @@
             </div>
         </div>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="form__container">
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="{{ route('store_author') }}" method="POST" class="edit__form"  enctype="multipart/form-data">
+            <form action="{{ route('update_author', $author_id) }}" method="POST" class="edit__form"  enctype="multipart/form-data">
 
                 @csrf
+                @method('PUT')
 
                 @foreach (LaravelLocalization::getSupportedLocales() as $locale_code => $local)
 
@@ -176,11 +186,15 @@
                         <div class="image__container full px-0">
                             <div class="upload__image__container">
                                 <!-- Upload image input-->
-                                <input id="upload" type="file" class="upload__img" onchange="readURL(this);" name="image" value="{{ $author[$locale_code]->image  }}">
+                                <input id="upload" type="file" class="upload__img" onchange="readURL(this);" name="image" value="">
                                 <!-- Uploaded image area-->
                                 <div class="image__area" onclick="open_input('upload')">
-                                    <p class="image__area__info" id="info">{{ __('admin.upload_image') }}</p>
-                                    <img id="imageResult"src="#" alt="">
+
+                                    @if(empty($author[$locale_code]->image))
+                                        <p class="image__area__info" id="info">{{ __('admin.upload_image') }}</p>
+                                    @endif
+
+                                    <img id="imageResult" src="{{ asset('storage/uploads/author/images/' . $author[$locale_code]->image)  }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -202,7 +216,7 @@
                         <div class="input__group full">
                             <div class="switch__container">
                                 <label class="switch">
-                                    <input type="checkbox" name="publish" id="publish" checked>
+                                    <input type="checkbox" name="publish" id="publish" {{ $author[$locale_code]->publish == 1 ? 'checked' : '' }} >
                                     <span class="slider round"></span>
                                 </label>
                                 <p>{{ __('admin.publish_author') }}</p>

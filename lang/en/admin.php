@@ -57,6 +57,7 @@ return [
     'publish_author' => 'Publish Author',
     'create_author' => 'Create Author',
     'author_meta' => 'Author Meta',
+    'author_edit_success' => 'Author has been updated successfully',
 
     // Category
     'new_category' => 'New Category',

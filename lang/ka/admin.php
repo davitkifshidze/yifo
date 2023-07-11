@@ -57,6 +57,7 @@ return [
     'publish_author' => 'ავტორის ხილვადობა',
     'create_author' => 'ავოტორის შექმნა',
     'author_meta' => 'ავოტორის მეტა',
+    'author_edit_success' => 'ავოტორი წარმატებით განახლდა',
 
     // Category
     'new_category' => 'ახალი კატეგორია',

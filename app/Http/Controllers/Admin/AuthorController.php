@@ -7,6 +7,7 @@ use App\Http\Requests\NewsAuthorRequest;
 use App\Models\Author;
 use App\Models\AuthorTranslations;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -141,8 +142,6 @@ class AuthorController extends Controller
     public function edit(string $id)
     {
 
-        $locale = LaravelLocalization::getCurrentLocale();
-
         foreach(LaravelLocalization::getSupportedLocales() as $locale_code => $locale):
 
             $author[$locale_code] = Author::select('authors.id', 'authors.slug', 'authors.image', 'authors.thumb_image', 'authors.email', 'authors.facebook', 'authors.publish')
@@ -165,35 +164,120 @@ class AuthorController extends Controller
                 ->first();
         endforeach;
 
-        return view('admin.news.author.edit', compact('author'));
+        $author_id = $author[LaravelLocalization::getCurrentLocale()]->id;
+
+        return view('admin.news.author.edit', compact('author', 'author_id'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(NewsAuthorRequest $request, string $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        $author = Author::find($id);
+        $author = Author::findOrFail($id);
+        $author->slug = $request->slug;
+        $author->facebook = $request->facebook;
+        $author->email = $request->email;
+        $author->publish = $request->has('publish') ? 1 : 0;
 
-        $author->update([
-            'slug' => $request->slug,
-            'email' => $request->email,
-            'facebook' => $request->facebook,
-            'publish' => $request->publish == 'on' ? 1 : 0,
-        ]);
+        if ($request->hasFile('image')) {
 
-        $locale = LaravelLocalization::getCurrentLocale();
+            /** Remove Old Image & Thumb Image & Also Empty Folder */
+            if ($author->image) {
+                Storage::delete('public/uploads/author/images/' . $author->image);
+            }
 
-        AuthorTranslations::where('author_id', $id)
-            ->where('locale', $locale)
-            ->update([
-                'name' => $request->name,
-                'description' => $request->description,
-            ]);
+            if ($author->thumb_image) {
+                $thumbnail_data = unserialize($author->thumb_image);
+                foreach ($thumbnail_data as $thumbnail) {
+                    Storage::delete('public/uploads/author/images/' . $thumbnail);
+                }
+            }
+
+            /** Upload new image */
+            $author_image_dir = storage_path('app/public/uploads/author/images/');
+            deleteEmptyFolders($author_image_dir);
+
+            /** Upload new image */
+            $current_date = Carbon::now();
+            $month = $current_date->format('m');
+            $year = $current_date->format('Y');
+
+            $path = 'public/uploads/author/images/' . $year . '/' . $month;
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path, 0777, true);
+            }
+
+            $image_name = Str::random(20) . '.' . $request->image->getClientOriginalExtension();
+            $image_path = $year . '/' . $month . '/' . $image_name;
+
+            Storage::putFileAs($path, $request->image, $image_name);
+
+            /** Create new thumbnails */
+            $thumbnail_size_list = [
+                'small' => [
+                    'width' => '100',
+                    'height' => '100',
+                ],
+                'medium' => [
+                    'width' => '400',
+                    'height' => '400',
+                ],
+                'high' => [
+                    'width' => '600',
+                    'height' => '600',
+                ]
+            ];
+
+            $thumbnail_data = [];
+
+            foreach ($thumbnail_size_list as $folder => $size) {
+                $thumbnail_path = $path . '/thumb/' . $folder;
+                if (!Storage::exists($thumbnail_path)) {
+                    Storage::makeDirectory($thumbnail_path, 0777, true);
+                }
+
+                $thumb_image_path = $year . '/' . $month . '/thumb/' . $folder . '/' . $image_name;
+
+                $thumbnail_data[$folder] = $thumb_image_path;
+
+                $thumbnail_image_path = $thumbnail_path . '/' . $image_name;
+                Image::make(storage_path('app/' . $path . '/' . $image_name))
+                    ->fit($size['width'], $size['height'])
+                    ->save(storage_path('app/' . $thumbnail_image_path));
+            }
+
+            $thumbnail_serialize = serialize($thumbnail_data);
+
+            $author->image = $image_path;
+            $author->thumb_image = $thumbnail_serialize;
+        }
+
+        $author->save();
+
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $local) {
+            $translation = AuthorTranslations::where('author_id', $author->id)
+                ->where('locale', $localeCode)
+                ->firstOrFail();
+
+            $translation->name = $request->name[$localeCode] ?? null;
+            $translation->description = $request->description[$localeCode] ?? null;
+            $translation->meta_title = $request->meta_title[$localeCode] ?? null;
+            $translation->meta_keywords = $request->meta_keywords[$localeCode] ?? null;
+            $translation->meta_description = $request->meta_description[$localeCode] ?? null;
+            $translation->facebook_meta_title = $request->facebook_meta_title[$localeCode] ?? null;
+            $translation->facebook_meta_description = $request->facebook_meta_description[$localeCode] ?? null;
+            $translation->twitter_meta_title = $request->twitter_meta_title[$localeCode] ?? null;
+            $translation->twitter_meta_description = $request->twitter_meta_description[$localeCode] ?? null;
+
+            $translation->save();
+        }
 
         return redirect()->route('edit_author',$id)->with( 'update', 'success' );
+
     }
+
 
     /**
      * Remove the specified resource from storage.

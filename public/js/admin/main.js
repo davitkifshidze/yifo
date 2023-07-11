@@ -1,4 +1,4 @@
-// საიდბარის შეკეცვა | გამოშლა
+// Open & Shrink Sidebar
 const shrink__btn = document.querySelector('.shrink__btn')
 shrink__btn.addEventListener('click', () => {
     const template = document.querySelector('.panel__page__template')
@@ -43,7 +43,7 @@ shrink__btn.addEventListener('click', () => {
 
 })
 
-// arrow-ზე დაჭერისას submenu-ს გახსნა
+// Open Submenu After Click Parent
 const sidebar__parent__menu = document.querySelector('.sidebar__menu__link__parent')
 
 sidebar__parent__menu.addEventListener('click', () => {
@@ -56,7 +56,7 @@ sidebar__parent__menu.addEventListener('click', () => {
 })
 
 
-// Lang Switcher
+// Main Language Switcher
 const defaultOption = document.querySelector('.default__lang');
 const selectUl = document.querySelector('.lang__select');
 const selectWrap = document.querySelector('.lang__switcher');
