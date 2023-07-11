@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ asset('css/admin/responsive.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/admin/news/author/index.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/news/author/modal.css') }}">
 @endsection
 
 @section('script')
