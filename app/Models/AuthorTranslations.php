@@ -23,7 +23,7 @@ class AuthorTranslations extends Model
         'twitter_meta_description',
     ];
 
-    public function category(): BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
     }
