@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image',254)->nullable()->default(NULL);
             $table->text('thumb_image')->nullable()->default(NULL);
             $table->string('email');
-            $table->string('facebook');
+            $table->string('facebook')->nullable()->default(NULL);
             $table->boolean('publish')->default(true);
             $table->timestamps();
             $table->softDeletes();

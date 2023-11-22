@@ -48,6 +48,10 @@
     --dash-green-box: #d3ffda;
     --dash-green: #00ff5a;
 
+    --error-bg: #f8d7da;
+    --error-text: #b02a37;
+    --error-border: #f1aeb5;
+
     --font-Noto-Sans-Georgian: 'Noto Sans Georgian', sans-serif;
 }
 
@@ -95,4 +99,15 @@ ul {
 
 textarea:focus, input:focus{
     outline: none;
+}
+
+.error__container{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border: var(--error-border);
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 5px;
 }

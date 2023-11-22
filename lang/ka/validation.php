@@ -32,10 +32,18 @@ return [
     'alpha_dash' => ':attribute ველი უნდა შეიცავდეს მხოლოდ ასოებს, რიცხვებს, ტირეებს და ქვედა ხაზებს.',
     'alpha_num' => ':attribute ველი უნდა შეიცავდეს მხოლოდ ასოებსა და ციფრებს.',
     'required_without' => ':attribute ველი საჭიროა, როცა :values არ არის შეყვანილი',
+    'required_without_all' => ':attribute ველი საჭიროა, როდესაც  :values არ არის.',
+    'email' => ':attribute ველი უნდა იყოს ვალიდური მისამართი.',
+    'regex' => ':attribute ველის ფორმატი არასწორია.',
+
+
+
 
     'attributes' => [
         'name' => 'სახელწოდება',
-        'slug' => 'ლინკი',
+        'name.ka' => 'ქართული სახელწოდება',
+        'name.en' => 'ინგლისური სახელწოდება',
+        'slug' => 'Slug',
         'email' => 'ელ-ფოსტა',
         'description' => 'აღწერა',
         'password' => 'პაროლი',

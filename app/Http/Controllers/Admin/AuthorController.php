@@ -42,75 +42,80 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NewsAuthorRequest $request)
     {
 
         $author = new Author();
         $author->slug = $request->slug;
-        $author->facebook = $request->facebook;
+        $author->facebook = $request->facebook ?? null;
         $author->email = $request->email;
         $author->publish = $request->has('publish') ? 1 : 0 ;
+
 
         /**
          * Image Upload
          */
-        $current_date = Carbon::now();
-        $month = $current_date->format('m');
-        $year = $current_date->format('Y');
+        if ($request->hasFile('image')) {
 
-        $path = 'public/uploads/author/images/' . $year . '/' . $month;
-        if (!Storage::exists($path)) {
-            Storage::makeDirectory($path, 0777, true);
-        }
+            $current_date = Carbon::now();
+            $month = $current_date->format('m');
+            $year = $current_date->format('Y');
 
-        $image_name = Str::random(20) . '.' . $request->image->getClientOriginalExtension();
-        $image_path = $year . '/' . $month . '/' . $image_name;
-
-        Storage::putFileAs($path, $request->image, $image_name);
-
-        /**
-         * Create Thumbnail
-         */
-
-        $thumbnail_size_list = [
-            'small'=>[
-                'width'=>'100',
-                'height'=>'100',
-            ],
-            'medium'=>[
-                'width'=>'400',
-                'height'=>'400',
-            ],
-            'high'=>[
-                'width'=>'600',
-                'height'=>'600',
-            ]
-        ];
-
-        $thumbnail_data = [];
-
-        foreach ($thumbnail_size_list as $folder => $size):
-
-            $thumbnai_path = $path . '/thumb/' . $folder;
-            if (!Storage::exists($thumbnai_path)) {
-                Storage::makeDirectory($thumbnai_path, 0777, true);
+            $path = 'public/uploads/author/images/' . $year . '/' . $month;
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path, 0777, true);
             }
 
-            $thumb_image_path = $year . '/' . $month . '/thumb/' . $folder . '/' . $image_name;
+            $image_name = Str::random(20) . '.' . $request->image->getClientOriginalExtension();
+            $image_path = $year . '/' . $month . '/' . $image_name;
 
-            $thumbnail_data[$folder] = $thumb_image_path;
+            Storage::putFileAs($path, $request->image, $image_name);
 
-            $thumbnail_image_path = $thumbnai_path . '/' . $image_name;
-            Image::make(storage_path('app/' . $path . '/' . $image_name))
-                ->fit($size['width'], $size['height'])
-                ->save(storage_path('app/' . $thumbnail_image_path));
+            /**
+             * Create Thumbnail
+             */
 
-        endforeach;
+            $thumbnail_size_list = [
+                'small'=>[
+                    'width'=>'100',
+                    'height'=>'100',
+                ],
+                'medium'=>[
+                    'width'=>'400',
+                    'height'=>'400',
+                ],
+                'high'=>[
+                    'width'=>'600',
+                    'height'=>'600',
+                ]
+            ];
 
-        $thumbnail_serialize = serialize($thumbnail_data);
+            $thumbnail_data = [];
 
-        $author->image = $request->image ? $image_path : null;
-        $author->thumb_image = $request->image ? $thumbnail_serialize : null;
+            foreach ($thumbnail_size_list as $folder => $size):
+
+                $thumbnai_path = $path . '/thumb/' . $folder;
+                if (!Storage::exists($thumbnai_path)) {
+                    Storage::makeDirectory($thumbnai_path, 0777, true);
+                }
+
+                $thumb_image_path = $year . '/' . $month . '/thumb/' . $folder . '/' . $image_name;
+
+                $thumbnail_data[$folder] = $thumb_image_path;
+
+                $thumbnail_image_path = $thumbnai_path . '/' . $image_name;
+                Image::make(storage_path('app/' . $path . '/' . $image_name))
+                    ->fit($size['width'], $size['height'])
+                    ->save(storage_path('app/' . $thumbnail_image_path));
+
+            endforeach;
+
+            $thumbnail_serialize = serialize($thumbnail_data);
+
+            $author->image = $request->image ? $image_path : null;
+            $author->thumb_image = $request->image ? $thumbnail_serialize : null;
+
+        }
 
         $author->save();
 
@@ -173,7 +178,7 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(NewsAuthorRequest $request, $id): RedirectResponse
     {
         $author = Author::findOrFail($id);
         $author->slug = $request->slug;
