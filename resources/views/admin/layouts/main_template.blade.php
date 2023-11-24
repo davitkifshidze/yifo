@@ -49,9 +49,13 @@
     {{--  Custom Style  --}}
     @yield('style')
 
+    {{-- Translate For Js  --}}
+    @yield('translate')
+
     {{--  Custom Global Js  --}}
     <script src="{{ asset('js/admin/app.js') }}"></script>
     @yield('header-script')
+
 
 </head>
 <body>

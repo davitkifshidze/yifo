@@ -3,6 +3,7 @@
 return [
 
     // Global
+    'all' => 'All',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'search' => 'Search',
@@ -43,6 +44,7 @@ return [
     'facebook_meta' => 'Facebook Meta',
     'twitter_meta' => 'Twitter Meta',
     'upload_image' => 'Upload Image',
+    'clear' => 'Clear',
 
     // Login
     'welcome' => 'Hello Again!!!',
@@ -58,7 +60,8 @@ return [
     'create_author' => 'Create Author',
     'author_meta' => 'Author Meta',
     'author_edit_success' => 'Author has been updated successfully',
-
+    'delete_author' => 'Delete author',
+    'confirm_author_delete' => 'Are you sure you want to delete the author ?',
     // Category
     'new_category' => 'New Category',
     'create_category' => 'Create Category',

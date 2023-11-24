@@ -20,15 +20,25 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = Author::select('authors.id', 'authors.slug', 'authors.publish', 'authors.facebook', 'authors.email', 'authors.created_at', 'authors.updated_at', 'author_translations.locale', 'author_translations.name', 'author_translations.description')
+            ->join('author_translations', 'author_translations.author_id', '=', 'authors.id')
+            ->where('locale', '=', LaravelLocalization::getCurrentLocale());
 
-        $authors = Author::select('authors.id', 'authors.slug','authors.publish','authors.facebook','authors.email', 'authors.created_at', 'authors.updated_at', 'author_translations.locale', 'author_translations.name',  'author_translations.description')
-            ->join('author_translations','author_translations.author_id','=','authors.id')
-            ->where('locale', '=', LaravelLocalization::getCurrentLocale())
-            ->get();
+        if($request->has('search')):
+            $search_term = $request->input('search');
+            $query->where(function ($sub_query) use ($search_term) {
+                $sub_query->where('authors.slug', 'like', "%$search_term%")
+                    ->orWhere('author_translations.name', 'like', "%$search_term%")
+                    ->orWhere('authors.email', 'like', "%$search_term%");
+            });
+        endif;
 
-        return view('admin.news.author.index', compact('authors'));
+        $authors = $query->paginate(10)->withQueryString();
+
+        return view('admin.news.author.index', compact('authors', 'request'));
+
     }
 
     /**

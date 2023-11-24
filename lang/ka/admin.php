@@ -3,6 +3,7 @@
 return [
 
     // Global
+    'all' => 'სულ',
     'edit' => 'რედაქტორება',
     'delete' => 'წაშლა',
     'search' => 'ძებნა',
@@ -43,6 +44,7 @@ return [
     'facebook_meta' => 'ფეისბუქის მეტა',
     'twitter_meta' => 'ტვიტერის მეტა',
     'upload_image' => 'ატვირთეთ სურათი',
+    'clear' => 'გასუფთავება',
 
     // Login
     'welcome' => 'გამარჯობა!!!',
@@ -56,6 +58,8 @@ return [
     'edit_author' => 'ავტორის რედაქტირება',
     'publish_author' => 'ავტორის ხილვადობა',
     'create_author' => 'ავტორის შექმნა',
+    'delete_author' => 'ავტორის წაშლა',
+    'confirm_author_delete' => 'ნამდვილად გსურთ ავტორის წაშლა ?',
     'author_meta' => 'ავტორის მეტა',
     'author_edit_success' => 'ავოტორი წარმატებით განახლდა',
 
