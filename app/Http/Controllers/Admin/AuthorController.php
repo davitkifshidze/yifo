@@ -30,8 +30,8 @@ class AuthorController extends Controller
             $search_term = $request->input('search');
             $query->where(function ($sub_query) use ($search_term) {
                 $sub_query->where('authors.slug', 'like', "%$search_term%")
-                    ->orWhere('author_translations.name', 'like', "%$search_term%")
-                    ->orWhere('authors.email', 'like', "%$search_term%");
+                    ->orWhere('authors.email', 'like', "%$search_term%")
+                    ->orWhere('author_translations.name', 'like', "%$search_term%");
             });
         endif;
 
@@ -196,6 +196,7 @@ class AuthorController extends Controller
         $author->email = $request->email;
         $author->publish = $request->has('publish') ? 1 : 0;
 
+
         if ($request->hasFile('image')) {
 
             /** Remove Old Image & Thumb Image & Also Empty Folder */
@@ -267,7 +268,33 @@ class AuthorController extends Controller
 
             $author->image = $image_path;
             $author->thumb_image = $thumbnail_serialize;
+        }else{
+
+            if($request->img_delete){
+
+                $author = Author::findOrFail($id);
+
+                if ($author->image) {
+                    Storage::delete('public/uploads/author/images/' . $author->image);
+                }
+
+                if ($author->thumb_image) {
+                    $thumbnailData = unserialize($author->thumb_image);
+                    foreach ($thumbnailData as $thumbnail) {
+                        Storage::delete('public/uploads/author/images/' . $thumbnail);
+                    }
+                }
+
+                $authorImageDir = storage_path('app/public/uploads/author/images/');
+                deleteEmptyFolders($authorImageDir);
+
+                $author->image = null;
+                $author->thumb_image = null;
+
+            }
+
         }
+
 
         $author->save();
 

@@ -10,6 +10,13 @@
 
 @endsection
 
+@section('translate')
+    <script>
+        let delete_category = '{{ __('admin.delete_category') }}';
+        let confirm_category_delete = '{{ __('admin.confirm_category_delete') }}';
+    </script>
+@endsection
+
 @section('script')
     <script src="{{ asset('js/admin/main.js') }}"></script>
     <script src="{{ asset('js/admin/news/category/index.js') }}"></script>
@@ -34,33 +41,40 @@
         <div class="category__table__container">
             <div class="category__header">
                 <div class="search__category">
-                    <form action="search" class="search__form" method="get">
-                        <input class="search__input" type="text" placeholder="{{ __('admin.search') }}">
+                    <form action="{{ route('category_list') }}" class="search__form" method="get">
+
+                        <input name="search" class="search__input" type="text" placeholder="{{ __('admin.search') }}" value="{{ request('search') }}">
 
                         <button type="submit" class="search__icon">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
                 </div>
-            </div>
-            <div class="table__container">
-                <table class="category__table">
-                    <thead>
-                    <tr class="table__head">
-                        <th>
-                            <input class="category__checkbox" type="checkbox" name="all__category" value="category">
-                        </th>
-                        <th>{{ __('admin.name') }}</th>
-                        <th>{{ __('admin.slug') }}</th>
-                        <th>{{ __('admin.visibility') }}</th>
-                        <th>{{ __('admin.last_update') }}</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody class="table__body">
 
-                        <?php foreach ($categories as $key => $category): ?>
+                @if($request->has('search') && $request->filled('search'))
+                    <a href="{{ route('category_list') }}" class="clear__btn">{{ __('admin.clear') }}</a>
+                @endif
+            </div>
+
+            @if(!$categories->isEmpty())
+                <div class="table__container">
+                    <table class="category__table">
+                        <thead>
+                        <tr class="table__head">
+                            <th>
+                                <input class="category__checkbox" type="checkbox" name="all__category" value="category">
+                            </th>
+                            <th>{{ __('admin.name') }}</th>
+                            <th>{{ __('admin.slug') }}</th>
+                            <th>{{ __('admin.visibility') }}</th>
+                            <th>{{ __('admin.last_update') }}</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody class="table__body">
+
+                            <?php foreach ($categories as $key => $category): ?>
                         <tr>
                             <td>
                                 <input class="category__checkbox" type="checkbox" name="select__category" value="category">
@@ -87,9 +101,12 @@
                             </td>
                         </tr>
                         <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <div class="empty__container"></div>
+            @endif
 
         </div>
 

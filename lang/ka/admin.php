@@ -58,9 +58,9 @@ return [
     'edit_author' => 'ავტორის რედაქტირება',
     'publish_author' => 'ავტორის ხილვადობა',
     'create_author' => 'ავტორის შექმნა',
-    'delete_author' => 'ავტორის წაშლა',
-    'confirm_author_delete' => 'ნამდვილად გსურთ ავტორის წაშლა ?',
     'author_meta' => 'ავტორის მეტა',
+    'confirm_author_delete' => 'ნამდვილად გსურთ ავტორის წაშლა ?',
+    'delete_author' => 'ავტორის წაშლა',
     'author_edit_success' => 'ავოტორი წარმატებით განახლდა',
 
     // Category
@@ -69,6 +69,9 @@ return [
     'publish_category' => 'კატეგორიის ხილვადობა',
     'edit_category' => 'კატეგორიის რედაქტირება',
     'category_meta' => 'კატეგორიის მეტა',
+    'category_edit_success' => 'კატეგორია წარმატებით განახლდა',
+    'delete_category' => 'კატეგორიის წაშლა',
+    'confirm_category_delete' => 'ნამდვილად გსურთ კატეგორიის წაშლა ?',
 
     // News
     'new_news' => 'ახალი სიახლე',

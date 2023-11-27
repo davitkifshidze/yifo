@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class NewsCategoryRequest extends FormRequest
 {
@@ -26,27 +27,30 @@ class NewsCategoryRequest extends FormRequest
 
         $id = $this->route('id');
 
-        if ($this->isMethod('post')) {
+        $nameRules = [];
 
-            return [
-                'name' => 'required|text|min:3|max:64',
-                'description' => 'max:1024',
-                'slug' => 'required|unique:categories,slug',
-            ];
-        } else {
-
-            return [
-                'name' => 'required|text|min:3|max:64',
-                'description' => 'max:1024',
-                'slug' => [
-                    'required',
-                    'string',
-                    Rule::unique('categories', 'slug')->ignore($id)
-                ],
-
-            ];
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $locale) {
+            $nameRules["name.{$localeCode}"] = 'string|min:3|max:64';
         }
 
+        $requiredWithoutAllRules = [];
+
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $locale) {
+            $otherLocales = array_diff(array_keys(LaravelLocalization::getSupportedLocales()), [$localeCode]);
+            $requiredWithoutAllRules["name.{$localeCode}"] = 'required_without_all:' . implode(',', array_map(function ($otherLocale) {
+                    return "name.{$otherLocale}";
+                }, $otherLocales));
+        }
+
+        return array_merge($nameRules, $requiredWithoutAllRules, [
+            'description' => 'max:2048',
+            'slug' => [
+                'required',
+                'string',
+                Rule::unique('categories', 'slug')->ignore($id),
+                'regex:/^[a-zA-Z-]+$/',
+            ],
+        ]);
 
     }
 }

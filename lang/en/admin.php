@@ -60,14 +60,19 @@ return [
     'create_author' => 'Create Author',
     'author_meta' => 'Author Meta',
     'author_edit_success' => 'Author has been updated successfully',
-    'delete_author' => 'Delete author',
-    'confirm_author_delete' => 'Are you sure you want to delete the author ?',
+    'delete_author' => 'Delete Author',
+    'confirm_author_delete' => 'Are you sure you want to delete the Author ?',
+
     // Category
     'new_category' => 'New Category',
     'create_category' => 'Create Category',
     'publish_category' => 'Publish Category',
     'edit_category' => 'Edit Category',
     'category_meta' => 'Category Meta',
+    'category_edit_success' => 'Category has been updated successfully',
+    'delete_category' => 'Delete Category',
+    'confirm_category_delete' => 'Are you sure you want to delete the Category ?',
+
 
     // News
     'new_news' => 'New News',

@@ -33,14 +33,13 @@
         <div class="form__container">
 
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div class="error__container">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
                 </div>
             @endif
+
 
             <form action="{{ route('store_category') }}" method="POST" class="create__form" enctype="multipart/form-data">
 
@@ -57,7 +56,7 @@
                                     <p>{{ __('admin.title') }}</p>
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
-                                <input type="text" name="name[{{ $locale_code }}]" data-lang="{{ $locale_code }}" value="{{ old('name') }}">
+                                <input type="text" name="name[{{ $locale_code }}]" data-lang="{{ $locale_code }}" value="{{ old("name.$locale_code") }}">
                             </div>
                         </div>
 
@@ -69,7 +68,7 @@
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
 
-                                <textarea name="description[{{ $locale_code }}]">{{ old('description') }}</textarea>
+                                <textarea name="description[{{ $locale_code }}]">{{ old("description.$locale_code") }}</textarea>
                             </div>
                         </div>
 
@@ -90,7 +89,7 @@
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="meta_title[{{ $locale_code }}]" value="{{ old('meta_title') }}">
+                                    <input type="text" name="meta_title[{{ $locale_code }}]" value="{{ old("meta_title.$locale_code") }}">
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -98,7 +97,7 @@
                                         <p>{{ __('admin.keywords') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="meta_keywords[{{ $locale_code }}]" value="{{ old('meta_keywords') }}">
+                                    <input type="text" name="meta_keywords[{{ $locale_code }}]" value="{{ old("meta_keywords.$locale_code") }}">
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -107,7 +106,7 @@
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
 
-                                    <textarea name="meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old('meta_description') }}</textarea>
+                                    <textarea name="meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old("meta_description.$locale_code") }}</textarea>
                                 </div>
                             </div>
 
@@ -117,7 +116,7 @@
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="facebook_meta_title[{{ $locale_code }}]" value="{{ old('facebook_meta_title') }}">
+                                    <input type="text" name="facebook_meta_title[{{ $locale_code }}]" value="{{ old("facebook_meta_title.$locale_code") }}">
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -126,7 +125,7 @@
                                         <span><i class="fa-solid fa-snowflake[{{ $locale_code }}]"></i></span>
                                     </label>
 
-                                    <textarea name="facebook_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old('facebook_meta_description') }}</textarea>
+                                    <textarea name="facebook_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old("facebook_meta_description.$locale_code") }}</textarea>
                                 </div>
                             </div>
 
@@ -136,7 +135,7 @@
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="twitter_meta_title[{{ $locale_code }}]" value="{{ old('twitter_meta_title') }}">
+                                    <input type="text" name="twitter_meta_title[{{ $locale_code }}]" value="{{ old("twitter_meta_title.$locale_code") }}">
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -145,7 +144,7 @@
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
 
-                                    <textarea name="twitter_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old('twitter_meta_description') }}</textarea>
+                                    <textarea name="twitter_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old("twitter_meta_description.$locale_code") }}</textarea>
                                 </div>
                             </div>
 

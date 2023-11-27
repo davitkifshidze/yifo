@@ -33,11 +33,11 @@
     --edit: #dd8621;
     --edit-hover: #f59e0b;
 
-    --red: #FF0000FF;
-    --red-light: #ff7c88;
-
     --delete: #e11d48;
     --delete-hover: #f43f5e;
+
+    --red: #FF0000FF;
+    --red-light: #ff7c88;
 
     --dash-blue-box: #cfe8ff;
     --dash-blue: #3c91e6;
@@ -79,6 +79,10 @@ ul {
 
 .none {
     display: none;
+}
+
+.block {
+    display: block;
 }
 
 .hide {

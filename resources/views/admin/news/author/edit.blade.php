@@ -39,12 +39,10 @@
         </div>
 
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div class="error__container">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
             </div>
         @endif
 
@@ -190,11 +188,14 @@
                                 <!-- Uploaded image area-->
                                 <div class="image__area" onclick="open_input('upload')">
 
-                                    @if(empty($author[$locale_code]->image))
-                                        <p class="image__area__info" id="info">{{ __('admin.upload_image') }}</p>
-                                    @endif
+                                    <p class="image__area__info <?= $author[$locale_code]->image ? 'none' : 'block' ?>" id="info">{{ __('admin.upload_image') }}</p>
 
-                                    <img id="imageResult" src="{{ asset('storage/uploads/author/images/' . $author[$locale_code]->image)  }}" alt="">
+                                    <span class="remove__btn <?= $author[$locale_code]->image ? 'block' : 'none' ?>" onclick="removeImage(event)">
+                                        <i class="fa-regular fa-circle-xmark"></i>
+                                    </span>
+
+                                    <img id="upload__img__result" src="{{ $author[$locale_code]->image ? asset('storage/uploads/author/images/' . $author[$locale_code]->image) : ''  }}" alt="">
+
                                 </div>
                             </div>
                         </div>

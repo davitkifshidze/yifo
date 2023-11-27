@@ -63,6 +63,7 @@
 .form__container {
     width: 100%;
     display: flex;
+    flex-direction: column;
 }
 
 .create__form{
@@ -146,7 +147,6 @@
     border-radius: 8px;
     width: 100%;
 }
-
 
 /* Appropriate Input */
 .slug__container{
@@ -280,7 +280,6 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-
 /* Btn */
 .create__submit__container{
     display: flex;
@@ -308,7 +307,6 @@ input:checked + .slider:before {
     margin-right: 15px;
     font-family: var(--font-Noto-Sans-Georgian);
 }
-
 
 /* Meta Box */
 .meta__container{

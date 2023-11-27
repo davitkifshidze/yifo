@@ -17,6 +17,12 @@
 
 @section('content')
 
+    @if(session('update'))
+        <script>
+            showMessage('success', '{{ __('admin.category_edit_success') }}' , 1000, 'top-end');
+        </script>
+    @endif
+
     <div class="edit__page__container">
         <div class="edit__page__header">
             <p class="edit__title">
@@ -33,18 +39,17 @@
         <div class="form__container">
 
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div class="error__container">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
                 </div>
             @endif
 
-            <form action="{{ route('store_category') }}" method="POST" class="edit__form" enctype="multipart/form-data">
+            <form action="{{ route('update_category', $category_id) }}" method="POST" class="edit__form"  enctype="multipart/form-data">
 
                 @csrf
+                @method('PUT')
 
                 @foreach (LaravelLocalization::getSupportedLocales() as $locale_code => $local)
 
@@ -57,7 +62,7 @@
                                     <p>{{ __('admin.title') }}</p>
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
-                                <input type="text" name="name[{{ $locale_code }}]" data-lang="{{ $locale_code }}" value="{{ old('name') }}">
+                                <input type="text" name="name[{{ $locale_code }}]" data-lang="{{ $locale_code }}" value="{{ $category[$locale_code]->name }}">
                             </div>
                         </div>
 
@@ -69,7 +74,8 @@
                                     <span><i class="fa-solid fa-snowflake"></i></span>
                                 </label>
 
-                                <textarea name="description[{{ $locale_code }}]">{{ old('description') }}</textarea>
+                                <textarea name="description[{{ $locale_code }}]">{{ $category[$locale_code]->description }}</textarea>
+
                             </div>
                         </div>
 
@@ -90,7 +96,8 @@
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="meta_title[{{ $locale_code }}]" value="{{ old('meta_title') }}">
+                                    <input type="text" name="meta_title[{{ $locale_code }}]" value="{{ $category[$locale_code]->meta_title }}">
+
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -98,7 +105,8 @@
                                         <p>{{ __('admin.keywords') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="meta_keywords[{{ $locale_code }}]" value="{{ old('meta_keywords') }}">
+                                    <input type="text" name="meta_keywords[{{ $locale_code }}]" value="{{ $category[$locale_code]->meta_keywords }}">
+
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -106,8 +114,7 @@
                                         <p>{{ __('admin.description') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-
-                                    <textarea name="meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old('meta_description') }}</textarea>
+                                    <textarea name="meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ $category[$locale_code]->meta_description }}</textarea>
                                 </div>
                             </div>
 
@@ -117,7 +124,7 @@
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="facebook_meta_title[{{ $locale_code }}]" value="{{ old('facebook_meta_title') }}">
+                                    <input type="text" name="facebook_meta_title[{{ $locale_code }}]" value="{{ $category[$locale_code]->facebook_meta_title }}">
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -126,7 +133,7 @@
                                         <span><i class="fa-solid fa-snowflake[{{ $locale_code }}]"></i></span>
                                     </label>
 
-                                    <textarea name="facebook_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old('facebook_meta_description') }}</textarea>
+                                    <textarea name="facebook_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ $category[$locale_code]->facebook_meta_description }}</textarea>
                                 </div>
                             </div>
 
@@ -136,7 +143,7 @@
                                         <p>{{ __('admin.title') }}</p>
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
-                                    <input type="text" name="twitter_meta_title[{{ $locale_code }}]" value="{{ old('twitter_meta_title') }}">
+                                    <input type="text" name="twitter_meta_title[{{ $locale_code }}]" value="{{ $category[$locale_code]->twitter_meta_title }}">
                                 </div>
 
                                 <div class="input__group full px-0">
@@ -145,7 +152,7 @@
                                         <span><i class="fa-solid fa-snowflake"></i></span>
                                     </label>
 
-                                    <textarea name="twitter_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ old('twitter_meta_description') }}</textarea>
+                                    <textarea name="twitter_meta_description[{{ $locale_code }}]" cols="30" rows="5">{{ $category[$locale_code]->twitter_meta_description }}</textarea>
                                 </div>
                             </div>
 
@@ -167,7 +174,7 @@
                             </label>
 
                             <div class="slug__container">
-                                <input type="text" name="slug" id="slug" value="{{ old('slug') }}" readonly>
+                                <input type="text" name="slug" id="slug" value="{{ $category[$locale_code]->slug }}" readonly>
                                 <div class="slug__edit">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </div>
@@ -180,8 +187,12 @@
                                 <input id="upload" type="file" class="upload__img" onchange="readURL(this);" name="image" value="{{ old('image') }}">
                                 <!-- Uploaded image area-->
                                 <div class="image__area" onclick="open_input('upload')">
-                                    <p class="image__area__info" id="info">{{ __('admin.upload_image') }}</p>
-                                    <img id="imageResult"src="#" alt="">
+
+                                    @if(empty($category[$locale_code]->image))
+                                        <p class="image__area__info" id="info">{{ __('admin.upload_image') }}</p>
+                                    @endif
+
+                                    <img id="imageResult" src="{{ asset('storage/uploads/category/images/' . $category[$locale_code]->image)  }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -190,7 +201,7 @@
                         <div class="input__group full">
                             <div class="switch__container">
                                 <label class="switch">
-                                    <input type="checkbox" name="publish" id="publish" checked>
+                                    <input type="checkbox" name="publish" id="publish" {{ $category[$locale_code]->publish == 1 ? 'checked' : '' }} >
                                     <span class="slider round"></span>
                                 </label>
                                 <p>{{ __('admin.publish_category') }}</p>

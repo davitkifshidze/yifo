@@ -63,6 +63,7 @@
 .form__container {
     width: 100%;
     display: flex;
+    flex-direction: column;
 }
 
 .edit__form{
@@ -200,6 +201,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .image__area:hover{
@@ -214,6 +216,23 @@
     height: 100%;
     z-index: 2;
     position: relative;
+}
+
+.remove__btn{
+    position: absolute;
+    right: -11px;
+    top: -13px;
+    z-index: 3;
+}
+
+.remove__btn:hover svg{
+    color: var(--delete-hover);
+}
+
+.remove__btn svg{
+    font-size: 30px;
+    color: var(--green-dark);
+    background-color: var(--white);
 }
 
 /* Switch Toggle Box */
@@ -306,7 +325,6 @@ input:checked + .slider:before {
     margin-right: 15px;
     font-family: var(--font-Noto-Sans-Georgian);
 }
-
 
 /* Meta Box */
 .meta__container{
