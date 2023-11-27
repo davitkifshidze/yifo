@@ -48,7 +48,7 @@ class NewsCategoryRequest extends FormRequest
                 'required',
                 'string',
                 Rule::unique('categories', 'slug')->ignore($id),
-                'regex:/^[a-zA-Z-]+$/',
+                'regex:/^[a-zA-Z0-9-]+$/',
             ],
         ]);
 

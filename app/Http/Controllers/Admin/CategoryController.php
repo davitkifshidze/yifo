@@ -73,17 +73,17 @@ class CategoryController extends Controller
              */
 
             $thumbnail_size_list = [
-                'small'=>[
-                    'width'=>'100',
-                    'height'=>'100',
+                'small' => [
+                    'width' => '150',
+                    'height' => '150',
                 ],
-                'medium'=>[
-                    'width'=>'400',
-                    'height'=>'400',
+                'medium' => [
+                    'width' => '500',
+                    'height' => '500',
                 ],
-                'high'=>[
-                    'width'=>'600',
-                    'height'=>'600',
+                'high' => [
+                    'width' => '1024',
+                    'height' => '1024',
                 ]
             ];
 
@@ -220,16 +220,16 @@ class CategoryController extends Controller
             /** Create new thumbnails */
             $thumbnail_size_list = [
                 'small' => [
-                    'width' => '100',
-                    'height' => '100',
+                    'width' => '150',
+                    'height' => '150',
                 ],
                 'medium' => [
-                    'width' => '400',
-                    'height' => '400',
+                    'width' => '500',
+                    'height' => '500',
                 ],
                 'high' => [
-                    'width' => '600',
-                    'height' => '600',
+                    'width' => '1024',
+                    'height' => '1024',
                 ]
             ];
 

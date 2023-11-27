@@ -115,3 +115,8 @@ textarea:focus, input:focus{
     padding: 15px;
     border-radius: 5px;
 }
+
+button {
+    outline: none !important;
+    box-shadow: none !important;
+}

@@ -47,7 +47,7 @@ class NewsAuthorRequest extends FormRequest
                 'required',
                 'string',
                 Rule::unique('authors', 'slug')->ignore($id),
-                'regex:/^[a-zA-Z-]+$/',
+                'regex:/^[a-zA-Z0-9-]+$/',
             ],
             'email' => [
                 'required',
