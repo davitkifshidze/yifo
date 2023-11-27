@@ -49,8 +49,14 @@ slug_input.addEventListener("input", make_slug);
  */
 document.addEventListener('DOMContentLoaded', function () {
     const uploadInput = document.querySelector('#upload');
+    const img_remove_btn = document.querySelector('.remove__btn');
+
     uploadInput.addEventListener('change', function () {
         readURL(uploadInput);
+
+        if (img_remove_btn) {
+            img_remove_btn.style.display = uploadInput.files && uploadInput.files[0] ? 'block' : 'none';
+        }
     });
 });
 
@@ -60,7 +66,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
 
-            $('#imageResult').attr('src', e.target.result);
+            $('#upload__img__result').attr('src', e.target.result);
 
             const info_image = document.getElementById("info");
             if (info_image) {
@@ -139,4 +145,34 @@ lang_tabs.forEach(active_tab => {
         activeTab.click();
     });
 });
+
+function removeImage(event) {
+    event.stopPropagation();
+
+    const img_upload_input = document.querySelector('#upload');
+    img_upload_input.value = null;
+
+    $('#upload__img__result').attr('src', '');
+
+    const img_delete = document.querySelector('input[name="img_delete"]');
+
+    img_delete ? img_delete.value = 'true' : (() => {
+        const form = document.querySelector('.edit__form');
+        const img_delete_input = document.createElement('input');
+        img_delete_input.type = 'hidden';
+        img_delete_input.name = 'img_delete';
+        img_delete_input.value = 'true';
+        form.appendChild(img_delete_input);
+    })();
+
+    const img_remove_btn = document.querySelector('.remove__btn');
+    if (img_remove_btn) {
+        img_remove_btn.style.display = 'none';
+    }
+
+    const info = document.getElementById('info');
+    if (info) {
+        info.style.display = img_upload_input.files && img_upload_input.files[0] ? 'none' : 'block';
+    }
+}
 

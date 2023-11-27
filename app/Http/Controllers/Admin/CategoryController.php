@@ -255,6 +255,31 @@ class CategoryController extends Controller
 
             $category->image = $image_path;
             $category->thumb_image = $thumbnail_serialize;
+        }else{
+
+            if($request->img_delete){
+
+                $category = Category::findOrFail($id);
+
+                if ($category->image) {
+                    Storage::delete('public/uploads/category/images/' . $category->image);
+                }
+
+                if ($category->thumb_image) {
+                    $thumbnailData = unserialize($category->thumb_image);
+                    foreach ($thumbnailData as $thumbnail) {
+                        Storage::delete('public/uploads/category/images/' . $thumbnail);
+                    }
+                }
+
+                $category_image_dir = storage_path('app/public/uploads/category/images/');
+                deleteEmptyFolders($category_image_dir);
+
+                $category->image = null;
+                $category->thumb_image = null;
+
+            }
+
         }
 
         $category->save();

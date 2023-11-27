@@ -285,8 +285,8 @@ class AuthorController extends Controller
                     }
                 }
 
-                $authorImageDir = storage_path('app/public/uploads/author/images/');
-                deleteEmptyFolders($authorImageDir);
+                $author_image_dir = storage_path('app/public/uploads/author/images/');
+                deleteEmptyFolders($author_image_dir);
 
                 $author->image = null;
                 $author->thumb_image = null;

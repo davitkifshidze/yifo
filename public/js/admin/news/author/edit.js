@@ -148,7 +148,6 @@ lang_tabs.forEach(active_tab => {
     });
 });
 
-
 function removeImage(event) {
     event.stopPropagation();
 
@@ -178,6 +177,3 @@ function removeImage(event) {
         info.style.display = img_upload_input.files && img_upload_input.files[0] ? 'none' : 'block';
     }
 }
-
-
-

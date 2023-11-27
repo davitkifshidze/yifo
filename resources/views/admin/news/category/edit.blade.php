@@ -188,11 +188,16 @@
                                 <!-- Uploaded image area-->
                                 <div class="image__area" onclick="open_input('upload')">
 
-                                    @if(empty($category[$locale_code]->image))
-                                        <p class="image__area__info" id="info">{{ __('admin.upload_image') }}</p>
-                                    @endif
 
-                                    <img id="imageResult" src="{{ asset('storage/uploads/category/images/' . $category[$locale_code]->image)  }}" alt="">
+                                    <p class="image__area__info <?= $category[$locale_code]->image ? 'none' : 'block' ?>" id="info">{{ __('admin.upload_image') }}</p>
+
+                                    <span class="remove__btn <?= $category[$locale_code]->image ? 'block' : 'none' ?>" onclick="removeImage(event)">
+                                        <i class="fa-regular fa-circle-xmark"></i>
+                                    </span>
+
+                                    <img id="upload__img__result" src="{{ $category[$locale_code]->image ? asset('storage/uploads/category/images/' . $category[$locale_code]->image) : ''  }}" alt="">
+
+
                                 </div>
                             </div>
                         </div>

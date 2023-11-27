@@ -180,7 +180,12 @@
                                 <!-- Uploaded image area-->
                                 <div class="image__area" onclick="open_input('upload')">
                                     <p class="image__area__info" id="info">{{ __('admin.upload_image') }}</p>
-                                    <img id="imageResult"src="#" alt="">
+
+                                    <span class="remove__btn none" onclick="removeImage(event)">
+                                        <i class="fa-regular fa-circle-xmark"></i>
+                                    </span>
+
+                                    <img id="upload__img__result" src="#" alt="">
                                 </div>
                             </div>
                         </div>

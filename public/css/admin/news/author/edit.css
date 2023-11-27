@@ -194,7 +194,7 @@
 }
 
 .image__area {
-    border: 2px dashed var(--gray);
+    border: 2px dashed var(--green-dark);
     padding: 1rem;
     margin-top: 10px;
     height: 200px;

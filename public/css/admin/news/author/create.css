@@ -194,19 +194,21 @@
 }
 
 .image__area {
-    border: 2px dashed var(--gray);
+    border: 2px dashed var(--green-dark);
     padding: 1rem;
     margin-top: 10px;
     height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .image__area:hover{
     border: 2px dashed var(--green-btn);
     cursor: pointer;
 }
+
 .image__area:hover .image__area__info{
     color: var(--green-btn);
 }
@@ -215,6 +217,23 @@
     height: 100%;
     z-index: 2;
     position: relative;
+}
+
+.remove__btn{
+    position: absolute;
+    right: -11px;
+    top: -13px;
+    z-index: 3;
+}
+
+.remove__btn:hover svg{
+    color: var(--delete-hover);
+}
+
+.remove__btn svg{
+    font-size: 30px;
+    color: var(--green-dark);
+    background-color: var(--white);
 }
 
 /* Switch Toggle Box */
